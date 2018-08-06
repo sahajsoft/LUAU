@@ -1,0 +1,213 @@
+{ "detail": {
+    "eventVersion": "1.05",
+    "userIdentity": {
+        "type": "Root",
+        "principalId": "316893886507",
+        "arn": "arn:aws:iam::316893886507:root",
+        "accountId": "316893886507",
+        "accessKeyId": "ASIAIWMGMSCQWCJSIXWA",
+        "userName": "sahajsoft",
+        "sessionContext": {
+            "attributes": {
+                "mfaAuthenticated": "false",
+                "creationDate": "2018-07-09T10:56:21Z"
+            }
+        }
+    },
+    "eventTime": "2018-07-09T10:59:28Z",
+    "eventSource": "ec2.amazonaws.com",
+    "eventName": "RunInstances",
+    "awsRegion": "us-west-2",
+    "sourceIPAddress": "106.51.37.106",
+    "userAgent": "console.ec2.amazonaws.com",
+    "requestParameters": {
+        "instancesSet": {
+            "items": [
+                {
+                    "imageId": "ami-e9503589",
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "keyName": "Sanjoy-test"
+                }
+            ]
+        },
+        "instanceType": "t2.micro",
+        "blockDeviceMapping": {
+            "items": [
+                {
+                    "deviceName": "/dev/sda1",
+                    "ebs": {
+                        "volumeSize": 20,
+                        "deleteOnTermination": false,
+                        "volumeType": "gp2"
+                    }
+                }
+            ]
+        },
+        "availabilityZone": "us-west-2c",
+        "tenancy": "default",
+        "monitoring": {
+            "enabled": false
+        },
+        "disableApiTermination": false,
+        "networkInterfaceSet": {
+            "items": [
+                {
+                    "deviceIndex": 0,
+                    "subnetId": "subnet-aa2639ec",
+                    "description": "Primary network interface",
+                    "deleteOnTermination": true,
+                    "associatePublicIpAddress": true,
+                    "groupSet": {
+                        "items": [
+                            {
+                                "groupId": "sg-909bdfe1"
+                            },
+                            {
+                                "groupId": "sg-89b7cdf2"
+                            }
+                        ]
+                    },
+                    "ipv6AddressCount": 0
+                }
+            ]
+        },
+        "ebsOptimized": false,
+        "tagSpecificationSet": {
+            "items": [
+                {
+                    "resourceType": "instance",
+                    "tags": [
+                        {
+                            "key": "Name",
+                            "value": "Rope-new"
+                        }
+                    ]
+                }
+            ]
+        },
+        "creditSpecification": {
+            "cpuCredits": "standard"
+        }
+    },
+    "responseElements": {
+        "requestId": "f6ef1a77-a4e9-431f-b9ed-b90c1bb703b7",
+        "reservationId": "r-0d8807d0dfb64d8a1",
+        "ownerId": "316893886507",
+        "groupSet": {},
+        "instancesSet": {
+            "items": [
+                {
+                    "instanceId": "i-092a8256362fcb350",
+                    "imageId": "ami-e9503589",
+                    "instanceState": {
+                        "code": 0,
+                        "name": "pending"
+                    },
+                    "privateDnsName": "ip-172-31-5-108.us-west-2.compute.internal",
+                    "keyName": "Sanjoy-test",
+                    "amiLaunchIndex": 0,
+                    "productCodes": {},
+                    "instanceType": "t2.micro",
+                    "launchTime": 1531133968000,
+                    "placement": {
+                        "availabilityZone": "us-west-2c",
+                        "tenancy": "default"
+                    },
+                    "monitoring": {
+                        "state": "disabled"
+                    },
+                    "subnetId": "subnet-aa2639ec",
+                    "vpcId": "vpc-79824f1c",
+                    "privateIpAddress": "172.31.5.108",
+                    "stateReason": {
+                        "code": "pending",
+                        "message": "pending"
+                    },
+                    "architecture": "x86_64",
+                    "rootDeviceType": "ebs",
+                    "rootDeviceName": "/dev/sda1",
+                    "blockDeviceMapping": {},
+                    "virtualizationType": "hvm",
+                    "hypervisor": "xen",
+                    "tagSet": {
+                        "items": [
+                            {
+                                "key": "Name",
+                                "value": "Rope-new"
+                            }
+                        ]
+                    },
+                    "groupSet": {
+                        "items": [
+                            {
+                                "groupId": "sg-909bdfe1",
+                                "groupName": "SSH and Port 80"
+                            },
+                            {
+                                "groupId": "sg-89b7cdf2",
+                                "groupName": "CentOS 6 -x86_64- - with Updates HVM-1704-AutogenByAWSMP-"
+                            }
+                        ]
+                    },
+                    "sourceDestCheck": true,
+                    "networkInterfaceSet": {
+                        "items": [
+                            {
+                                "networkInterfaceId": "eni-cecfbdd5",
+                                "subnetId": "subnet-aa2639ec",
+                                "vpcId": "vpc-79824f1c",
+                                "description": "Primary network interface",
+                                "ownerId": "316893886507",
+                                "status": "in-use",
+                                "macAddress": "0a:9e:77:9c:a9:d6",
+                                "privateIpAddress": "172.31.5.108",
+                                "privateDnsName": "ip-172-31-5-108.us-west-2.compute.internal",
+                                "sourceDestCheck": true,
+                                "groupSet": {
+                                    "items": [
+                                        {
+                                            "groupId": "sg-909bdfe1",
+                                            "groupName": "SSH and Port 80"
+                                        },
+                                        {
+                                            "groupId": "sg-89b7cdf2",
+                                            "groupName": "CentOS 6 -x86_64- - with Updates HVM-1704-AutogenByAWSMP-"
+                                        }
+                                    ]
+                                },
+                                "attachment": {
+                                    "attachmentId": "eni-attach-cdd2b630",
+                                    "deviceIndex": 0,
+                                    "status": "attaching",
+                                    "attachTime": 1531133968000,
+                                    "deleteOnTermination": true
+                                },
+                                "privateIpAddressesSet": {
+                                    "item": [
+                                        {
+                                            "privateIpAddress": "172.31.5.108",
+                                            "privateDnsName": "ip-172-31-5-108.us-west-2.compute.internal",
+                                            "primary": true
+                                        }
+                                    ]
+                                },
+                                "ipv6AddressesSet": {},
+                                "tagSet": {}
+                            }
+                        ]
+                    },
+                    "ebsOptimized": false,
+                    "cpuOptions": {
+                        "coreCount": 1,
+                        "threadsPerCore": 1
+                    }
+                }
+            ]
+        }
+    },
+    "requestID": "f6ef1a77-a4e9-431f-b9ed-b90c1bb703b7",
+    "eventID": "0a295b60-aade-43fa-b61f-5a7c90942540",
+    "eventType": "AwsApiCall",
+    "recipientAccountId": "316893886507"
+}}
