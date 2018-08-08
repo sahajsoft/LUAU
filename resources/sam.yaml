@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  EC2Tagger:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: tagger/ec2_tagger.lambda_handler
+      Runtime: python3.6
+      Policies: 
+        - AWSLambdaExecute
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:CreateTags
+                - ec2:DescribeInstances
+                - autoscaling:DescribeAutoScalingGroups
+                - autoscaling:DescribeAutoScalingInstances
+              Resource: '*'
+      CodeUri: ./LUAU.zip
+  ASGTagger:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: tagger/asg_tagger.lambda_handler
+      Runtime: python3.6
+      Policies: 
+        - AWSLambdaExecute
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:DescribeInstances
+                - ec2:CreateTags
+                - autoscaling:DescribeAutoScalingGroups
+                - autoscaling:DescribeAutoScalingInstances
+                - autoscaling:CreateOrUpdateTags
+              Resource: '*'
+      CodeUri: ./LUAU.zip

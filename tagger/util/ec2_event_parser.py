@@ -1,23 +1,20 @@
+import logging
+
 import boto3
 
-class EC2EventParser:
-    def __init__(self, ec2, event, context):
-        self.ec2 = ec2
+from .aws import ASGWrapper, EC2Wrapper
+from .event_parser import AWSEventParser
+
+logging.basicConfig()
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+
+class EC2EventParser(AWSEventParser):
+    def __init__(self, session, event, context):
+        self.session = session
         self.event = event
         self.context = context
-    
-    def get_username(self):
-        """Get username
-
-        Gets the username of the account that created the instance(s) in question
-
-        Returns:
-            str: Username of the account
-        """
-        return self.event['userIdentity'].get('userName', 'None')
-
-    def get_event_name(self):
-        return self.event['detail'].get('eventName', 'None')
 
     def get_created_instance_ids(self):
         instance_ids = []
@@ -38,6 +35,23 @@ class EC2EventParser:
         else:
             return []
 
+    def invoked_by_asg(self):
+        try:
+            return self.event['detail']['userIdentity']['invokedBy'] == 'autoscaling.amazonaws.com'
+        except KeyError as e:
+            logger.warning('Key doesnt exist: %s', str(e))
+            return False
+
     def parse_event(self):
-        return self.get_username(), self.get_resource_ids(self.get_event_name())
-        
+        import os
+        print(os.getcwd())
+        event_name = self.get_event_name()
+        resource_ids = self.get_resource_ids(event_name)
+        if event_name == 'RunInstances' and self.invoked_by_asg():
+            username = ASGWrapper(self.session).get_asg_user_tag_by_instance_id(
+                self.get_created_instance_ids())
+        else:
+            username = self.get_username()
+        return username, resource_ids
+
+    

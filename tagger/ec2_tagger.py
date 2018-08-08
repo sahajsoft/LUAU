@@ -1,12 +1,19 @@
 import boto3
-from util.ec2_event_parser import EC2EventParser
+from .util.ec2_event_parser import EC2EventParser
+from .util.aws import EC2Wrapper
+import logging
+
+logging.basicConfig()
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
  
 class EC2Tagger:
     def __init__(self, event, context):
-        self.ec2 = boto3.client('ec2')
+        self.session = boto3.Session()
+        self.ec2 = EC2Wrapper(self.session)
         self.event = event
         self.context = context
-        self.parser = EC2EventParser(self.ec2, self.event, self.context)
+        self.parser = EC2EventParser(self.session, self.event, self.context)
 
     def start(self):
         username, resource_ids = self.parser.parse_event()

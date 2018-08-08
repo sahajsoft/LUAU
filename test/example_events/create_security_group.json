@@ -1,4 +1,4 @@
-{
+{ "detail":{
     "eventVersion": "1.05",
     "userIdentity": {
         "type": "IAMUser",
@@ -15,32 +15,24 @@
         },
         "invokedBy": "signin.amazonaws.com"
     },
-    "eventTime": "2018-08-06T16:19:45Z",
+    "eventTime": "2018-08-06T16:17:18Z",
     "eventSource": "ec2.amazonaws.com",
-    "eventName": "CreateVolume",
+    "eventName": "CreateSecurityGroup",
     "awsRegion": "us-west-2",
     "sourceIPAddress": "76.182.94.115",
     "userAgent": "signin.amazonaws.com",
     "requestParameters": {
-        "size": "1",
-        "zone": "us-west-2a",
-        "volumeType": "gp2",
-        "encrypted": false
+        "groupName": "test_sg",
+        "groupDescription": "test security group to get example event in cloudtrail",
+        "vpcId": "vpc-79824f1c"
     },
     "responseElements": {
-        "requestId": "f4d3f085-55be-4eb9-a670-62293113f1ff",
-        "volumeId": "vol-039e2768db8889318",
-        "size": "1",
-        "zone": "us-west-2a",
-        "status": "creating",
-        "createTime": 1533572385000,
-        "volumeType": "gp2",
-        "iops": 100,
-        "encrypted": false,
-        "tagSet": {}
+        "requestId": "6feb7dc7-43e5-48a8-b272-9bd3e939dc04",
+        "_return": true,
+        "groupId": "sg-23b6aa53"
     },
-    "requestID": "f4d3f085-55be-4eb9-a670-62293113f1ff",
-    "eventID": "aa20c9dc-4c59-4a78-bdc6-119db3b4744b",
+    "requestID": "6feb7dc7-43e5-48a8-b272-9bd3e939dc04",
+    "eventID": "6e83eda2-a62c-4dac-aac6-758d1393b4a1",
     "eventType": "AwsApiCall",
     "recipientAccountId": "316893886507"
-}
+}}

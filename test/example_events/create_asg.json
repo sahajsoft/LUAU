@@ -1,4 +1,4 @@
-{
+{ "detail": {
     "eventVersion": "1.05",
     "userIdentity": {
         "type": "IAMUser",
@@ -15,24 +15,27 @@
         },
         "invokedBy": "signin.amazonaws.com"
     },
-    "eventTime": "2018-08-06T16:17:18Z",
-    "eventSource": "ec2.amazonaws.com",
-    "eventName": "CreateSecurityGroup",
+    "eventTime": "2018-08-06T16:24:34Z",
+    "eventSource": "autoscaling.amazonaws.com",
+    "eventName": "CreateAutoScalingGroup",
     "awsRegion": "us-west-2",
     "sourceIPAddress": "76.182.94.115",
     "userAgent": "signin.amazonaws.com",
     "requestParameters": {
-        "groupName": "test_sg",
-        "groupDescription": "test security group to get example event in cloudtrail",
-        "vpcId": "vpc-79824f1c"
+        "healthCheckGracePeriod": 300,
+        "desiredCapacity": 2,
+        "minSize": 2,
+        "launchConfigurationName": "test_asg_config",
+        "tags": [],
+        "maxSize": 2,
+        "newInstancesProtectedFromScaleIn": false,
+        "vPCZoneIdentifier": "subnet-5d3ce538",
+        "autoScalingGroupName": "test_asg_LUAU",
+        "validationOnly": false
     },
-    "responseElements": {
-        "requestId": "6feb7dc7-43e5-48a8-b272-9bd3e939dc04",
-        "_return": true,
-        "groupId": "sg-23b6aa53"
-    },
-    "requestID": "6feb7dc7-43e5-48a8-b272-9bd3e939dc04",
-    "eventID": "6e83eda2-a62c-4dac-aac6-758d1393b4a1",
+    "responseElements": null,
+    "requestID": "3412e3f3-9995-11e8-a487-fd50643de7de",
+    "eventID": "ffb5e982-3c3c-4041-ac62-3343c0027d81",
     "eventType": "AwsApiCall",
     "recipientAccountId": "316893886507"
-}
+}}
