@@ -12,6 +12,10 @@ build:
   stage: build
   script:
     - ./bin/build.sh
+  artifacts:
+    paths:
+    - ./LUAUTagger.zip
+    expire_in: 1 week
 
 deploy:
   stage: deploy

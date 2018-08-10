@@ -4,7 +4,7 @@ echo $LAMBDA_CODE_BUCKET
 
 aws cloudformation package \
 --template-file resources/sam.yaml \
---region us-west-2
+--region us-west-2 \
 --output-template-file resources/cf.yaml \
 --s3-bucket $LAMBDA_CODE_BUCKET --s3-prefix LUAU
 
