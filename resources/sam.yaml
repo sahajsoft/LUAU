@@ -22,13 +22,14 @@ Resources:
         EC2ResourceCreatedEvent:
           Type: CloudWatchEvent
           Properties:
-            detail:
-              eventType: AwsApiCall
-              eventName:
-                - RunInstances
-                - CreateImage
-                - CreateVolume
-                - CreateSecurityGroup
+            Pattern:
+              detail:
+                eventType: AwsApiCall
+                eventName:
+                  - RunInstances
+                  - CreateImage
+                  - CreateVolume
+                  - CreateSecurityGroup
   ASGTagger:
     Type: AWS::Serverless::Function
     Properties:
@@ -51,7 +52,8 @@ Resources:
         ASGCreatedEvent:
           Type: CloudWatchEvent
           Properties:
-            detail:
-              eventType: AwsApiCall
-              eventName: CreateAutoScalingGroup
+            Pattern:
+              detail:
+                eventType: AwsApiCall
+                eventName: CreateAutoScalingGroup
 
