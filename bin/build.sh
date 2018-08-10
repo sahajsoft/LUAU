@@ -5,7 +5,7 @@ fi
 
 virtualenv venv
 source venv/bin/activate
-#S3_CODE_BUCKET=$(aws ssm get-parameter --name S3_CODE_BUCKET | jq -r '.Parameter.Value')
+
 pip install -r requirements.txt
 
 python3 -m pytest --cov=tagger
@@ -20,9 +20,9 @@ find ./venv/lib/python3.6/site-packages/ | grep -E "(moto|mock|pytest|pytest_cov
 cp -r venv/lib/python3.6/site-packages/* build/
 
 cd build 
-zip -r LUAUTagger.zip .
+#zip -r LUAUTagger.zip .
 cd ..
-mv build/LUAUTagger.zip ./LUAUTagger.zip
+#mv build/LUAUTagger.zip ./LUAUTagger.zip
 
 rm -rf venv
 rm -rf build

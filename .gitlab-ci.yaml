@@ -1,0 +1,19 @@
+stages:
+  - build
+  - deploy 
+
+before_script:
+  - apt-get update -qq && apt-get install -y -qq python3 pip3 jq
+  - pip install awscli virtualenv
+  
+build:
+  stage: build
+  script:
+    - ./bin/build.sh
+
+deploy:
+  stage: deploy
+  script:
+    - ./bin/deploy.sh
+
+  
