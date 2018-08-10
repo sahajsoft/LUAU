@@ -3,7 +3,7 @@ stages:
   - deploy 
 
 before_script:
-  - apt-get install -y software-properties-common; add-apt-repository ppa:deadsnakes/ppa; apt-get -qq update; apt-get -y -qq install python3.6
+  - add-apt-repository ppa:deadsnakes/ppa; apt-get -qq update; apt-get -y -qq install python3.6
   - apt-get update -qq && apt-get install -y -qq python3-pip jq
   - pip3 install awscli virtualenv
   

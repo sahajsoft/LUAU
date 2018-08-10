@@ -8,7 +8,7 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-python3 -m pytest --cov=tagger
+python3 -m pytest --cov=tagger --cov-report html:cov_html
 
 deactivate
 
