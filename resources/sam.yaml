@@ -55,5 +55,6 @@ Resources:
             Pattern:
               detail:
                 eventType: AwsApiCall
-                eventName: CreateAutoScalingGroup
+                eventName: 
+                  - CreateAutoScalingGroup
 
