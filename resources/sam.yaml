@@ -18,6 +18,17 @@ Resources:
                 - autoscaling:DescribeAutoScalingInstances
               Resource: '*'
       CodeUri: ../LUAUTagger.zip
+      Events:
+        EC2ResourceCreatedEvent:
+          Type: CloudWatchEvent
+          Properties:
+            detail:
+              eventType: AwsApiCall
+              eventName:
+                - RunInstances
+                - CreateImage
+                - CreateVolume
+                - CreateSecurityGroup
   ASGTagger:
     Type: AWS::Serverless::Function
     Properties:
@@ -36,3 +47,11 @@ Resources:
                 - autoscaling:CreateOrUpdateTags
               Resource: '*'
       CodeUri: ../LUAUTagger.zip
+      Events:
+        ASGCreatedEvent:
+          Type: CloudWatchEvent
+          Properties:
+            detail:
+              eventType: AwsApiCall
+              eventName: CreateAutoScalingGroup
+
