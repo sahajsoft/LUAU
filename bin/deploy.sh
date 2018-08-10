@@ -11,5 +11,5 @@ aws cloudformation package \
 aws cloudformation deploy \
 --region us-west-2 \
 --template-file resources/cf.yaml \
---stack-name LUAU_Tagger \
+--stack-name LUAUTagger \
 --capabilities CAPABILITY_IAM
