@@ -20,9 +20,9 @@ find ./venv/lib/python3.6/site-packages/ | grep -E "(moto|mock|pytest|pytest_cov
 cp -r venv/lib/python3.6/site-packages/* build/
 
 cd build 
-#zip -r LUAUTagger.zip .
+zip -r LUAUTagger.zip .
 cd ..
-#mv build/LUAUTagger.zip ./LUAUTagger.zip
+mv build/LUAUTagger.zip ./LUAUTagger.zip
 
 rm -rf venv
 rm -rf build

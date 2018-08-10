@@ -14,7 +14,7 @@ build:
     - ./bin/build.sh
   artifacts:
     paths:
-    - ./LUAUTagger.zip
+    - LUAUTagger.zip
     expire_in: 1 week
 
 deploy:
