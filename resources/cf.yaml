@@ -10,7 +10,7 @@ Resources:
             Pattern:
               detail:
                 eventName:
-                - CreateAutoScalingGroup
+                  - CreateAutoScalingGroup
                 eventType: AwsApiCall      
       Handler: tagger/asg_tagger.lambda_handler
       Policies:
@@ -37,10 +37,10 @@ Resources:
             Pattern:
               detail:
                 eventName:
-                - RunInstances
-                - CreateImage
-                - CreateVolume
-                - CreateSecurityGroup
+                  - RunInstances
+                  - CreateImage
+                  - CreateVolume
+                  - CreateSecurityGroup
                 eventType: AwsApiCall
       Handler: tagger/ec2_tagger.lambda_handler
       Policies:
