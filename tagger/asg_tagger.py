@@ -1,6 +1,6 @@
 import boto3
-from tagger.util.asg_event_parser import AutoScalingEventParser
-from tagger.util.aws import ASGWrapper
+from tagger.parser.asg_event import AutoScalingEventParser
+from util.aws import ASGWrapper
 import logging
 
 logging.basicConfig()

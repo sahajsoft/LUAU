@@ -2,7 +2,7 @@ import unittest
 import boto3
 from moto import mock_ec2
 import json
-from tagger.util.ec2_event_parser import EC2EventParser
+from tagger.parser.ec2_event import EC2EventParser
 
 
 class TestEC2EventParser(unittest.TestCase):

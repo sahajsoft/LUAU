@@ -15,6 +15,7 @@ deactivate
 mkdir build
 find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 cp -r tagger build
+cp -r util build
 
 find ./venv/lib/python3.6/site-packages/ | grep -E "(moto|mock|pytest|pytest_cov|coverage)" | xargs rm -rf
 cp -r venv/lib/python3.6/site-packages/* build/

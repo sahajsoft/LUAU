@@ -1,6 +1,6 @@
 import unittest
 import json
-from tagger.util.asg_event_parser import AutoScalingEventParser
+from tagger.parser.asg_event import AutoScalingEventParser
 
 class TestAutoScalingEventParser(unittest.TestCase):
     def setUp(self):

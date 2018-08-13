@@ -1,6 +1,6 @@
 import boto3
-from tagger.util.ec2_event_parser import EC2EventParser
-from tagger.util.aws import EC2Wrapper
+from tagger.parser.ec2_event import EC2EventParser
+from util.aws import EC2Wrapper
 import logging
 
 logging.basicConfig()

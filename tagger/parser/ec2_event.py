@@ -2,8 +2,8 @@ import logging
 
 import boto3
 
-from .aws import ASGWrapper, EC2Wrapper
-from .event_parser import AWSEventParser
+from util.aws import ASGWrapper, EC2Wrapper
+from .base_event import AWSEventParser
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -43,8 +43,6 @@ class EC2EventParser(AWSEventParser):
             return False
 
     def parse_event(self):
-        import os
-        print(os.getcwd())
         event_name = self.get_event_name()
         resource_ids = self.get_resource_ids(event_name)
         if event_name == 'RunInstances' and self.invoked_by_asg():

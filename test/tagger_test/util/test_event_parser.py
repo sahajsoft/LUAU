@@ -1,7 +1,7 @@
 import unittest
 import boto3
 from moto import mock_ec2
-from tagger.util.event_parser import AWSEventParser
+from tagger.parser.base_event import AWSEventParser
 
 
 class TestAWSEventParser(unittest.TestCase):

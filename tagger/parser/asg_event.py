@@ -1,6 +1,6 @@
 import boto3
 import logging
-from .event_parser import AWSEventParser
+from .base_event import AWSEventParser
 
 
 logging.basicConfig()
