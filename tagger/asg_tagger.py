@@ -17,9 +17,11 @@ class ASGTagger:
 
     def start(self):
         username, asg_name = self.parser.parse_event()
+        logger.info("%s created autoscaling group %s", username, asg_name)
         tag = {
             'ResourceId': asg_name,
             'Key': 'Creator',
+            'ResourceType': 'auto-scaling-group',
             'Value': username,
             'PropagateAtLaunch': True
         }
