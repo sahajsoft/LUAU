@@ -24,7 +24,8 @@ Resources:
           Properties:
             Pattern:
               detail:
-                eventType: AwsApiCall
+                eventType: 
+                  - AwsApiCall
                 eventName:
                   - RunInstances
                   - CreateImage
@@ -54,7 +55,8 @@ Resources:
           Properties:
             Pattern:
               detail:
-                eventType: AwsApiCall
+                eventType: 
+                  - AwsApiCall
                 eventName: 
                   - CreateAutoScalingGroup
 
