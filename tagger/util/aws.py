@@ -19,7 +19,7 @@ class EC2Wrapper:
 class ASGWrapper:
     def __init__(self, session):
         self.session = session
-        self.asg = session.client('ec2')
+        self.asg = session.client('autoscaling')
 
     def get_asg_user_tag_by_instance_id(self, instance_ids):
         # Use the first instance because all of them will belong to the same ASG
