@@ -25,3 +25,6 @@ class ASGTagger:
         }
 
         self.asg.create_or_update_tags(Tags=[tag])
+
+def lambda_handler(event, context):
+    return ASGTagger(event, context).start()
