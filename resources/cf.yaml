@@ -5,7 +5,7 @@ Resources:
       CodeUri: s3://sahaj-lambda/LUAU/94714be71ee4ec6b994f69dd67f96bdc
       Events:
         ASGCreatedEvent:
-        Type: CloudWatchEvent
+          Type: CloudWatchEvent
           Properties:
             Pattern:
               detail:
