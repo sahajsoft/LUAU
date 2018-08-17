@@ -22,6 +22,16 @@ class ASGWrapper:
         self.asg = session.client('autoscaling')
 
     def get_asg_user_tag_by_instance_id(self, instance_ids):
+        """Get the name of the ASG for these instances
+
+        This is done to ensure that the owner of the ASG is accurated tagged as the owner
+        of the instances belonging to the ASG
+
+        Params:
+            instance_ids ([str]): List of instance_ids that belong to the same ASG
+        Returns:
+            str: The ASG Name associated with these instances
+        """
         # Use the first instance because all of them will belong to the same ASG
         instance_id = instance_ids[0]
         instance_data = self.asg.describe_auto_scaling_instances(InstanceIds=[instance_id])
@@ -33,6 +43,14 @@ class ASGWrapper:
             logger.error('Unknown Error: %s', str(e))
 
     def get_asg_instance_ids(self, asg_name): 
+        """Get the instance_ids of instances belonging to an ASG
+
+        Params:
+            asg_name (str): Name of an ASG
+        Returns:
+            [str]: List of ids of instances in the ASG 
+
+        """
         instance_ids = []
         # Grab the first item in the list because we're only asking for 1 ASG
         asg_data = self.asg.describe_auto_scaling_groups(
