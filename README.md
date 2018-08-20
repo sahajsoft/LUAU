@@ -2,9 +2,25 @@
 
 [![coverage report](https://gitlab.com/keithw1/LUAU/badges/master/coverage.svg)](https://gitlab.com/keithw1/LUAU/commits/master)
 
-# LUAU
+# Low Usage AWS Utility(LUAU)
+LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operations of amazon account by acting upon Trusted Advisor(TA) recommendations.
+
+## How it works?
+LUAU utilizes amazon's tagging system to create a framework that can alert users about their unececessary expenditure and help act upon them.
 
 ## Package Structure
+
+```
+├── bin
+├── mailer
+├── resources
+├── tagger
+│   └── parser
+├── test
+│   ├── example_events
+│   └── tagger_test
+└── util
+```
 
 - LUAU/
     - bin/
