@@ -5,3 +5,4 @@ __pycache__
 *.zip 
 .coverage 
 .DS_Store
+local_scripts

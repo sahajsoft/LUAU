@@ -5,6 +5,8 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+LOW_USE_CHECK_ID = 'Qch7DwouX1'
+
 class EC2Wrapper:
     def __init__(self, session):
         self.session = session
@@ -82,3 +84,19 @@ class ASGWrapper:
         asg_instances = self.get_asg_instance_ids(asg_name)
         EC2Wrapper(self.session).create_tags(Resources=asg_instances, Tags=[ec2_tag])
 
+class TrustedAdvisor:
+    def __init__(self, session):
+        self.session = session
+        self.support = session.client('support')
+
+    def get_low_use_instances(self):
+       response = self.support.describe_trusted_advisor_check_result(checkId=LOW_USE_CHECK_ID, language='en')
+       if 'result' in response:
+           return response['result'].get('flaggedResources', [])
+    
+    def get_low_use_summary(self):
+        response = self.support.describe_trusted_advisor_check_summaries(checkIds=[LOW_USE_CHECK_ID])
+        for checks in response.get('summaries', []):
+            if checks['checkId'] == LOW_USE_CHECK_ID:
+                return checks
+        return None
