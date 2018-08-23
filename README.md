@@ -12,7 +12,7 @@ LUAU utilizes amazon's tagging system to create a framework that can alert users
 
 ```
 ├── bin
-├── mailer
+├── low_use
 ├── resources
 ├── tagger
 │   └── parser
@@ -22,7 +22,7 @@ LUAU utilizes amazon's tagging system to create a framework that can alert users
 └── util
 ```
 - **bin**: Contains build/deploy scripts    
-- **mailer**: Will contain the Lambda function(s) responsible for processing Trusted Advisor data and emailing out the Low Use reports    
+- **low_use**: Will contain the Lambda function(s) responsible for processing Trusted Advisor data and emailing out the Low Use reports    
 - **resources**: This contains configuration files used in the build/deploy processes. Right now it only contains the SAM template for the tagger.   
 - **tagger**: This contains the Lambda functions responsible for auto-tagging AWS resources. Currently tags EC2, ASG, EBS, AMI, and Security Groups. This package also contains a parser subpackage used to parse the event data.     
 - **test**: Where the tests go. Each Python package will have it's own test package called `[package_name]_test`. This also contains a folder with example event data for the events we want to handle.     

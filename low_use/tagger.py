@@ -19,6 +19,18 @@ class LowUseTagger:
         self.low_use_instances = []
         self.instances_scheduled_for_deletion = []
 
+    def sync_whitelist(self):
+        for instance in self.whitelist:
+            self.dynamo.add_to_whitelist(instance['InstanceID'], instance['Creator'], instance['Reason'])
+
+    def sync_low_use_instances(self): 
+        for instance in self.low_use_instances:
+            self.flag_instance_as_low_use(instance['InstanceID'], instance['Creator'])
+        
+    def sync_instances_scheduled_for_deletion(self):
+        for instance in self.instances_scheduled_for_deletion:
+            self.flag_instance_for_deletion(instance['InstanceID'], instance['Creator'])        
+    
     def flag_instance_as_low_use(self, instance_id, creator):
         self.ec2.tag_as_low_use(instance_id)
         self.dynamo.add_to_low_use(instance_id, creator)
@@ -38,14 +50,11 @@ class LowUseTagger:
                     'Creator': creator,
                     'Reason': self.ec2.get_whitelist_reason_for_instance(instance_id)
                 })
-                #reason = self.ec2.get_whitelist_reason_for_instance(instance_id)
-                #self.dynamo.add_to_whitelist(instance_id, creator, reason)
             elif self.ec2.is_low_use(instance_id):
                 self.instances_scheduled_for_deletion.append({
                     'InstanceID': instance_id,
                     'Creator': creator
                 })
-                #self.flag_instance_for_deletion(instance_id, creator)
             elif self.ec2.is_scheduled_for_deletion(instance_id):
                 logger.info("Instance is already scheduled for deletion, doing nothing right now. In the future, instances will be deleted here")
             else:
@@ -53,8 +62,6 @@ class LowUseTagger:
                     'InstanceID': instance_id,
                     'Creator': creator
                 })
-                # self.flag_instance_as_low_use(instance_id, creator)
-
 
     def start(self):
         report = self.parser.parse_low_use_report()
