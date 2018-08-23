@@ -1,5 +1,5 @@
 import logging
-from util.aws import TrustedAdvisor
+from util.aws import TrustedAdvisor, EC2Wrapper
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -8,7 +8,8 @@ logger.setLevel(logging.INFO)
 class LowUseReportParser:
     def __init__(self, session):
         self.session = session
-        self.advisor = TrustedAdvisor(session)
+        self.advisor = TrustedAdvisor()
+        self.ec2 = EC2Wrapper(session)
 
     def parse_low_use_report(self): 
         report = self.advisor.get_low_use_instances()
@@ -24,6 +25,7 @@ class LowUseReportParser:
         usage_logs = metadata[5:19]
         instance_usage = self.parse_instance_usage(usage_logs)
         instance_metadata = {
+            'creator': self.ec2.get_creator_for_instance(metadata[1]),
             'region': metadata[0],
             'instance_id': metadata[1],
             'instance_name': metadata[2],

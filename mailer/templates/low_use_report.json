@@ -1,0 +1,8 @@
+{
+    "Template":{
+        "TemplateName": "LowUseReport",
+        "SubjectPart": "Low Use Report for {{creator}}",
+        "HtmlPart":"<h1> Hello {{creator_name}}</h1><p>You're getting this email because you have EC2 instances that are considered Low-Use. They have been flagged for deletion and will be deleted in 2 weeks if no action is taken.",
+        "TextPart":""
+    }
+}
