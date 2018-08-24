@@ -1,0 +1,23 @@
+{
+    "TemplateName": "AdminLowUseReport",
+    "SubjectPart": "Low Use Report for Admin",
+    "HtmlPart":["<h1> Hello Admin</h1>",
+                "<p>These are instances that are considered low use or scheduled for deletion</p><br>",
+                "<p>Below is a table of all instances in question:</p>",
+                "<table><tr>",
+                "<th>InstanceID</th><th>Creator</th><th>Scheduled For Deletion?</th><th>Cost Per Month (USD)</th><th>Average CPU Usage (%)</th><th>Average Network Usage (MB)</th></tr>",
+                "{{#each instance}}",
+                "<tr><td>{{ instance_id }}</td><td>{{ instance_creator }}</td><td>{{ scheduled_for_deletion }}</td><td>{{ cost }}</td> <td>{{ average_cpu_usage }}</td><td>{{ average_network_usage }}</td></tr>",
+                "{{/each}}</table>"],
+    "TextPart":["Hello Admin \n\n",
+                "These are instances that are considered low use or scheduled for deletion",
+                "Below is a table of all instances in question: \n",
+                "{{#each instance}}",
+                "- InstanceID: {{ instance_id }}",
+                "- Creator: {{ instance_creator }}",
+                "- Scheduled For Deletion?: {{ scheduled_for_deletion }}",
+                "- Cost Per Month (USD): {{ cost }}</td>",
+                "- Average CPU Usage (%): {{ average_cpu_usage }}",
+                "- Average Network Usage (MB): {{ average_network_usage }}",                 
+                "{{/each}}"]
+}

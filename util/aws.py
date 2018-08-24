@@ -1,11 +1,14 @@
 import boto3 
 import logging 
+import json
 
 logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 LOW_USE_CHECK_ID = 'Qch7DwouX1'
+SES_EMAIL = 'keithw@sahajsoft.com'
+ADMIN_EMAIL = 'keithw@sahajsoft.com'
 
 class EC2Wrapper:
     def __init__(self, session):
@@ -163,15 +166,6 @@ class TrustedAdvisor:
             if checks['checkId'] == LOW_USE_CHECK_ID:
                 return checks
         return None
-
-class SESWrapper:
-    def __init__(self, session):
-        self.session = session
-        self.ses = session.client('ses')
-
-    def create_template_for_low_use(self):
-        pass
-
     
 class DynamoWrapper:
     def __init__(self, session):
@@ -239,4 +233,75 @@ class DynamoWrapper:
     def delete_from_low_use(self, instance_id):
         key = {"InstanceID": instance_id}
         return self.low_use.delete_item(Key=key)
+
+class SESWrapper:
+    def __init__(self, session):
+        self.session = session
+        self.ses = session.client('ses')
+        self.low_use_template_name = 'LowUseReport'
+        self.admin_template_name = 'AdminLowUseReport'
+
+    def get_low_use_template_data(self, creator, low_use_instances, instances_scheduled_for_deletion):
+        template_data = {
+            'creator': creator,
+            'creator_name': creator.split('@')[0],
+            'instance': []
+        }
+
+        for instance in low_use_instances:
+            if instance['Creator'] is None:
+                instance['Creator'] = 'Unknown'
+            instance_data = {
+                'instance_id': instance['InstanceID'],
+                'instance_creator': instance['Creator'],
+                'scheduled_for_deletion': False,
+                'cost': instance['Cost'],
+                'average_cpu_usage': instance['AverageCpuUsage'],
+                'average_network_usage': instance['AverageNetworkUsage']
+            }
+            template_data['instance'].append(instance_data)
+        
+        for instance in instances_scheduled_for_deletion:
+            if instance['Creator'] is None:
+                instance['Creator'] = 'Unknown'
+            instance_data = {
+                'instance_id': instance['InstanceID'],
+                'instance_creator': instance['Creator'],
+                'scheduled_for_deletion': True,
+                'cost': instance['Cost'],
+                'average_cpu_usage': instance['AverageCpuUsage'],
+                'average_network_usage': instance['AverageNetworkUsage']
+            }
+            template_data['instance'].append(instance_data)
+
+        return template_data
+
+   
+    def send_low_use_email(self, creator, low_use_instances, instances_scheduled_for_deletion, TemplateName=None):
+        if creator is None:
+            creator = ADMIN_EMAIL
+        if TemplateName is None:
+            template_name = self.low_use_template_name
+        else:
+            template_name = TemplateName
+
+        source = SES_EMAIL
+        destination = {
+            'ToAddresses':[creator]
+        }
+        template_data = self.get_low_use_template_data(creator, low_use_instances, instances_scheduled_for_deletion)
+        template_data_json = json.dumps(template_data)
+        logger.info(template_data)
+        response = self.ses.send_templated_email(
+            Source=source,
+            Destination=destination,
+            Template=template_name,
+            TemplateData=template_data_json
+        )
+        return response
+
+    def send_admin_report(self, low_use_instances, instances_scheduled_for_deletion):
+        return self.send_low_use_email(ADMIN_EMAIL, low_use_instances, instances_scheduled_for_deletion, TemplateName=self.admin_template_name)
+
+
 

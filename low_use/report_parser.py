@@ -15,9 +15,7 @@ class LowUseReportParser:
         report = self.advisor.get_low_use_instances()
         list_of_instances = []
         for instance in report:
-            logger.info(len(instance['metadata']))
             instance_metadata = self.parse_metadata(instance['metadata'])
-            #logger.info(instance_metadata)
             list_of_instances.append(instance_metadata)
         return list_of_instances
 
@@ -45,7 +43,6 @@ class LowUseReportParser:
         for day in usage_logs:
             if day is None: continue
             usage = day.split(' ')
-            logger.info(usage)
             cpu_usage_over_time.append(usage[0])
             network_io_over_time.append(usage[2])
         return cpu_usage_over_time, network_io_over_time
