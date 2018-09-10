@@ -11,6 +11,11 @@ pip install -r requirements.txt
 
 python3 -m pytest --cov=tagger --cov=util
 
+if [ $? ==  1 ]; then
+    rm -rf venv
+    exit 1
+fi
+
 deactivate
 
 mkdir build
