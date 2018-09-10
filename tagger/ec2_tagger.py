@@ -1,4 +1,5 @@
 import boto3
+import os
 from tagger.parser.ec2_event import EC2EventParser
 from util.aws import EC2Wrapper
 import logging
@@ -9,7 +10,8 @@ logger.setLevel(logging.INFO)
  
 class EC2Tagger:
     def __init__(self, event, context):
-        self.session = boto3.Session()
+        self.region = os.environ['AWS_REGION']
+        self.session = boto3.Session(region_name=self.region)
         self.ec2 = EC2Wrapper(self.session)
         self.event = event
         self.context = context
@@ -21,7 +23,7 @@ class EC2Tagger:
             'Key': 'Creator',
             'Value': username
         }
-        self.ec2.create_tags(
+        return self.ec2.create_tags(
             Resources=resource_ids,
             Tags=[username_tag]
         )

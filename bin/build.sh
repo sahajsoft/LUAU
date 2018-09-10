@@ -2,13 +2,14 @@
 if [ -d "build" ]; then
     rm -rf build
 fi 
+find . | grep -E "(.pytest_cache|__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 
 virtualenv venv
 source venv/bin/activate
 
 pip install -r requirements.txt
 
-python3 -m pytest --cov=tagger
+python3 -m pytest --cov=tagger --cov=util
 
 deactivate
 

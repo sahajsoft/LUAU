@@ -22,18 +22,18 @@ class EC2Wrapper:
             Tags=Tags
         )
 
-    def tag_as_low_use(self, instance_id):
-        return self.tag_instance(instance_id, 'Low Use', True)
+    def tag_as_low_use(self, instance_id): 
+        return self.tag_instance(instance_id, 'Low Use', 'true')
 
     def tag_as_whitelisted(self, instance_id):
-        return self.tag_instance(instance_id, 'Whitelisted', True)
-
+        return self.tag_instance(instance_id, 'Whitelisted', 'true')
+    
     def tag_whitelist_reason(self, instance_id, reason):
         return self.tag_instance(instance_id, 'Reason', reason)
 
     def tag_for_deletion(self, instance_id):
-        return self.tag_instance(instance_id, 'Scheduled For Deletion', True)
-
+        return self.tag_instance(instance_id, 'Scheduled For Deletion', 'true')
+        
     def tag_instance(self, instance_id, tag_key, tag_value):
         tag = {
             'Key': tag_key,
@@ -80,7 +80,7 @@ class EC2Wrapper:
 
     def is_tagged(self, instance_id, tag_name):
         tag_value = self.get_tag_for_instance(instance_id, tag_name)
-        if tag_value is not None and tag_value == True:
+        if tag_value is not None and tag_value == 'true':
             return True
         else:
             return False
@@ -148,7 +148,7 @@ class ASGWrapper:
             logger.info(response)
 
         asg_instances = self.get_asg_instance_ids(asg_name)
-        EC2Wrapper(self.session).create_tags(Resources=asg_instances, Tags=[ec2_tag])
+        return EC2Wrapper(self.session).create_tags(Resources=asg_instances, Tags=[ec2_tag])
 
 
 class TrustedAdvisor:

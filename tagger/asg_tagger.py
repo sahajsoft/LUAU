@@ -1,4 +1,5 @@
 import boto3
+import os
 from tagger.parser.asg_event import AutoScalingEventParser
 from util.aws import ASGWrapper
 import logging
@@ -9,7 +10,8 @@ logger.setLevel(logging.INFO)
 
 class ASGTagger:
     def __init__(self, event, context):
-        self.session = boto3.Session()
+        self.region = os.environ['AWS_REGION']
+        self.session = boto3.Session(region_name=self.region)
         self.asg = ASGWrapper(self.session)
         self.event = event
         self.context = context
@@ -26,7 +28,8 @@ class ASGTagger:
             'PropagateAtLaunch': True
         }
 
-        self.asg.create_or_update_tags(Tags=[tag])
+        return self.asg.create_or_update_tags(Tags=[tag])
+        
 
 def lambda_handler(event, context):
     return ASGTagger(event, context).start()
