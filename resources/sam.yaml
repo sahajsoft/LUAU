@@ -6,6 +6,8 @@ Resources:
     Properties:
       Handler: tagger/ec2_tagger.lambda_handler
       Runtime: python3.6
+      Timeout: 300
+      MemorySize: 1024
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -36,6 +38,8 @@ Resources:
     Properties:
       Handler: tagger/asg_tagger.lambda_handler
       Runtime: python3.6
+      Timeout: 300
+      MemorySize: 1024
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -62,6 +66,8 @@ Resources:
   LowUseTagger:
     Type: AWS::Serverless::Function
     Properties:
+      Timeout: 300
+      MemorySize: 1024
       Handler: low_use/tagger.lambda_handler
       Runtime: python3.6
       Policies: 
@@ -80,6 +86,7 @@ Resources:
                 - dynamodb:GetItem
                 - ses:SendEmail
                 - ses:SendRawEmail
+                - ses:SendTemplatedEmail
                 - support:*
               Resource: '*'
       CodeUri: ../LUAUTagger.zip
