@@ -80,7 +80,7 @@ Resources:
                 - dynamodb:GetItem
                 - ses:SendEmail
                 - ses:SendRawEmail
-                - trustedadvisor:*
+                - support:*
               Resource: '*'
       CodeUri: ../LUAUTagger.zip
       Events:
