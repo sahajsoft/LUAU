@@ -15,9 +15,6 @@ Resources:
       Runtime: python3.6
       Timeout: 300
       MemorySize: 1024
-      Environment:
-        Variables:
-          AWS_REGION: !Ref AWSREGION
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -50,9 +47,6 @@ Resources:
       Runtime: python3.6
       Timeout: 300
       MemorySize: 1024
-      Environment:
-        Variables: 
-          AWS_REGION: !Ref AWSREGION
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -85,7 +79,6 @@ Resources:
       Runtime: python3.6
       Environment:
         Variables: 
-          AWS_REGION: !Ref AWSREGION
           SES_EMAIL: !Ref SESEMAIL
           ADMIN_EMAIL: !Ref ADMINEMAIL
       Policies: 

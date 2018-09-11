@@ -12,7 +12,7 @@ aws cloudformation package \
 
 aws cloudformation deploy \
 --region $AWS_REGION \
---parameter-overrides AWSREGION=$AWS_REGION SESEMAIL=$SES_EMAIL ADMINEMAIL=$ADMIN_EMAIL \
+--parameter-overrides SESEMAIL=$SES_EMAIL ADMINEMAIL=$ADMIN_EMAIL \
 --template-file resources/cf.yaml \
 --stack-name LUAUTagger \
 --capabilities CAPABILITY_IAM
