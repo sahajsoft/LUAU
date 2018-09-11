@@ -1,11 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Parameters:
-  AWS_REGION:
+  AWSREGION:
     Type: String
-  SES_EMAIL:
+  SESEMAIL:
     Type: String
-  ADMIN_EMAIL:
+  ADMINEMAIL:
     Type: String
 Resources:
   EC2Tagger:
@@ -17,7 +17,7 @@ Resources:
       MemorySize: 1024
       Environment:
         Variables:
-          AWS_REGION: !Ref AWS_REGION
+          AWS_REGION: !Ref AWSREGION
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -52,7 +52,7 @@ Resources:
       MemorySize: 1024
       Environment:
         Variables: 
-          AWS_REGION: !Ref AWS_REGION
+          AWS_REGION: !Ref AWSREGION
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -85,9 +85,9 @@ Resources:
       Runtime: python3.6
       Environment:
         Variables: 
-          AWS_REGION: !Ref AWS_REGION
-          SES_EMAIL: !Ref SES_EMAIL
-          ADMIN_EMAIL: !Ref ADMIN_EMAIL
+          AWS_REGION: !Ref AWSREGION
+          SES_EMAIL: !Ref SESEMAIL
+          ADMIN_EMAIL: !Ref ADMINEMAIL
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'

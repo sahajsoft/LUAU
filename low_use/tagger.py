@@ -1,5 +1,6 @@
 import boto3
 import logging
+import os
 from util.aws import EC2Wrapper, DynamoWrapper, SESWrapper
 from low_use.report_parser import LowUseReportParser
 
@@ -9,7 +10,7 @@ logger.setLevel(logging.INFO)
 
 class LowUseTagger:
     def __init__(self, event, context):
-        self.session = boto3.Session(region_name='us-west-2')
+        self.session = boto3.Session(region_name=os.environ['AWS_REGION'])
         self.ec2 = EC2Wrapper(self.session)
         self.dynamo = DynamoWrapper(self.session)
         self.ses = SESWrapper(self.session)
