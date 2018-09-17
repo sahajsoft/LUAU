@@ -22,18 +22,18 @@ class EC2Wrapper:
             Tags=Tags
         )
 
-    def tag_as_low_use(self, instance_id): 
+    def tag_as_low_use(self, instance_id):
         return self.tag_instance(instance_id, 'Low Use', 'true')
 
     def tag_as_whitelisted(self, instance_id):
         return self.tag_instance(instance_id, 'Whitelisted', 'true')
-    
+
     def tag_whitelist_reason(self, instance_id, reason):
         return self.tag_instance(instance_id, 'Reason', reason)
 
     def tag_for_deletion(self, instance_id):
         return self.tag_instance(instance_id, 'Scheduled For Deletion', 'true')
-        
+
     def tag_instance(self, instance_id, tag_key, tag_value):
         tag = {
             'Key': tag_key,
@@ -52,7 +52,6 @@ class EC2Wrapper:
             return self.get_tag_for_instance(instance_id, 'Reason')
         else:
             return None
-
 
     def get_tag_for_instance(self, instance_id, tag_key):
         tags = self.get_tags_for_instance(instance_id)
@@ -167,84 +166,6 @@ class TrustedAdvisor:
                 return checks
         return None
 
-
-class DynamoWrapper:
-    """
-    Handler for dynamodb data
-    """
-    def __init__(self, session):
-        self.session = session
-        self.dynamo = session.resource('dynamodb')
-        self.low_use = self.dynamo.Table('LowUse')
-        self.whitelist = self.dynamo.Table('Whitelist')
-
-    def get_whitelist_instance(self, instance_id):
-        """
-        Fetch Instance from whitelist table.
-        """
-        key = {"InstanceID": instance_id}
-        return self.whitelist.get_item(Key=key)
-
-    def get_low_use_instance(self, instance_id):
-        """
-        Fetch instance from whitelist table
-        """
-        key = {"InstanceID": instance_id}
-        return self.low_use.get_item(Key=key)
-
-    def is_whitelisted(self, instance_id):
-        item = self.get_whitelist_instance(instance_id)
-        if item is None:
-            return False
-        else:
-            return True
-
-    def is_low_use(self, instance_id):
-        item = self.get_low_use_instance(instance_id)
-        if item is None:
-            return False
-        else:
-            return True
-
-    def is_scheduled_for_deletion(self, instance_id):
-        item = self.get_low_use_instance(instance_id)
-        if item is not None:
-            return item.get('Scheduled For Deletion', False)
-
-    def add_to_whitelist(self, instance_id, creator, reason):
-        item = {
-            "InstanceID": instance_id,
-            "Creator": creator,
-            "Reason": reason,
-            "EmailSent": False
-        }
-        self.delete_from_low_use(instance_id)
-        response = self.whitelist.put_item(Item=item)
-        return response
-
-    def add_to_low_use(self, instance_id, creator):
-        item = {
-            "InstanceID": instance_id,
-            "Creator": creator,
-            "Scheduled For Deletion": False,
-            "EmailSent": False
-        }
-
-        return self.low_use.put_item(Item=item)
-
-    def schedule_for_deletion(self, instance_id, creator):
-        item = {
-            "InstanceID": instance_id,
-            "Creator": creator,
-            "Scheduled For Deletion": True
-        }
-
-        return self.low_use.put_item(Item=item)
-
-
-    def delete_from_low_use(self, instance_id):
-        key = {"InstanceID": instance_id}
-        return self.low_use.delete_item(Key=key)
 
 class SESWrapper:
     def __init__(self, session):
