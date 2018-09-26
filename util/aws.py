@@ -84,7 +84,11 @@ class EC2Wrapper:
         else:
             return False
 
-
+    def stop_instances(self, instance_ids): 
+        response = self.ec2.stop_instances(InstanceIds=instance_ids)
+        logger.info(response)
+        return response
+        
 class ASGWrapper:
     def __init__(self, session):
         self.session = session

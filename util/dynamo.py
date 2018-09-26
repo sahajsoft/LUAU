@@ -78,6 +78,10 @@ class DynamoWrapper(object):
         key = {"InstanceID": instance_id}
         return self.low_use.delete_item(Key=key)
 
+    def batch_delete_item_from_low_use(self, instance_ids): 
+        for instance_id in instance_ids:
+            self.delete_from_low_use(instance_id)
+
 
 class EmailDynamoWrapper(DynamoWrapper):
     """

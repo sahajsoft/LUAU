@@ -12,14 +12,31 @@ LUAU utilizes amazon's tagging system to create a framework that can alert users
 
 ```
 ├── bin
-├── low_use
+│   ├── build.sh -- Builds deployment package
+│   ├── create_templates.py -- Used to create email templates in SES
+│   └── deploy.sh -- Deploys lambdas via CloudFormation
+├── low_use -- Parses low-use instances and sends reports
+│   ├── report_parser.py -- Parses low-use report
+│   └── tagger.py -- Tags instance as LowUse, Whitelisted, or Scheduled For Deletion
+├── requirements.txt
 ├── resources
+│   ├── env.properties -- Parameters for Lambdas (SES Email, etc.)
+│   ├── sam.yaml -- SAM template for deployment
+│   └── templates
+│       ├── admin_report.json -- Email template for Admin Report
+│       └── low_use_report.json -- Email template for creator-level report
 ├── tagger
-│   └── parser
-├── test
-│   ├── example_events
-│   └── tagger_test
+│   ├── asg_tagger.py -- Tags Autoscaling groups and their instances
+│   ├── ec2_tagger.py -- Tags EC2 resources (Instances, AMIs, EBS Volumes, SGs)
+│   └── parser -- Parses AWS API Event JSON
+│       ├── __init__.py
+│       ├── asg_event.py 
+│       ├── base_event.py
+│       └── ec2_event.py
 └── util
+    ├── aws.py -- Basic AWS Wrapper (SES, TrustedAdvisor, EC2, ASG)
+    └── dynamo.py -- Wrapper for Dynamo tables (CRUD Access)
+
 ```
 - **bin**: Contains build/deploy scripts    
 - **low_use**: Will contain the Lambda function(s) responsible for processing Trusted Advisor data and emailing out the Low Use reports    

@@ -20,6 +20,7 @@ class LowUseTagger:
         self.whitelist = []
         self.low_use_instances = []
         self.instances_scheduled_for_deletion = []
+        self.instances_to_stop = []
 
     def sync_whitelist(self):
         for instance in self.whitelist:
@@ -63,7 +64,8 @@ class LowUseTagger:
                     'AverageNetworkUsage': network_average
                 })
             elif self.ec2.is_scheduled_for_deletion(instance_id):
-                logger.info("Instance is already scheduled for deletion, doing nothing right now. In the future, instances will be deleted here")
+                logger.info("Instance is already scheduled for deletion, doing nothing right now. In the future, instances will be stopped here")
+                self.instances_to_stop.append(instance_id)
             else:
                 self.low_use_instances.append({
                     'InstanceID': instance_id,
@@ -86,6 +88,12 @@ class LowUseTagger:
     def start(self):
         report = self.parser.parse_low_use_report()
         self.sort_instances(report)
+
+        #if self.instances_to_stop != []:
+        #    self.ec2.stop_instances(instances_to_stop)
+        #    self.dynamo.batch_delete_item_from_low_use(instances_to_stop)
+        
+
 
         #for creator_report_data in self.get_creator_report():
             #response = self.ses.send_low_use_email(creator_report_data['creator'], creator_report_data['low_use'], creator_report_data['scheduled_for_deletion'])
