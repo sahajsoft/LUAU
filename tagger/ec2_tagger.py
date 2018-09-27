@@ -4,7 +4,7 @@
 This module is deployed as a Lambda function within an AWS Environment. This function is responsible for
 tagging EC2 instances/resources at creation with the email associated with the account creating the instance/resource.
 
-Example:
+Note:
     The function expects specific AWS Event Data, passed through the event parameter. It supports four events, each
     referring to a supported resource:
         * RunInstances
@@ -50,7 +50,7 @@ class EC2Tagger:
         This method is called by the lambda handler. It parses the event and tags the appropriate resources.
 
         Returns:
-            dict: Response from AWS API call to create tags on desired resources
+            dict: Response from AWS CreateTags API Call
 
         """
         username, resource_ids = self.parser.parse_event()
@@ -75,7 +75,7 @@ def lambda_handler(event, context):
         context (dict): Context dictionary passed by AWS (not used but required by AWS)
     
     Returns:
-        dict: response from the EC2Tagger.start()
+        dict: Response from AWS CreateTags API Call
     """
     return EC2Tagger(event, context).start()
 

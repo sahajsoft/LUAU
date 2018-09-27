@@ -28,10 +28,10 @@ class LowUseTagger:
         event (dict): Event dictionary passed by Lambda trigger
         context (dict): Context dictionary passed by Lambda trigger
         parser (obj): Parses the Low Use Report
-        whitelist (:obj: `list` of :obj: `dict`): list of whitelisted instances and associated metadata 
-        low_use_instances (:obj: `list` of :obj: `dict`): list of low_use instances and associated metadata 
-        instances_scheduled_for_deletion (:obj: `list` of :obj: `dict`): list of instances scheduled for deletion and associated metadata 
-        instances_to_stop (:obj: `list` of :obj: `dict`): list of instances to be stopped and associated metadata 
+        whitelist (:obj:`list` of :obj:`dict`): list of whitelisted instances and associated metadata 
+        low_use_instances (:obj:`list` of :obj:`dict`): list of low_use instances and associated metadata 
+        instances_scheduled_for_deletion (:obj:`list` of :obj:`dict`): list of instances scheduled for deletion and associated metadata 
+        instances_to_stop (:obj:`list` of :obj:`dict`): list of instances to be stopped and associated metadata 
     """
     def __init__(self, event, context):
         self.session = boto3.Session(region_name=os.environ['AWS_REGION'])
@@ -104,7 +104,7 @@ class LowUseTagger:
             * To Be Stopped Immediately (Stopped in this invocation)
 
         Args:
-            instances (:obj: `list` of :obj: `dict`): List of instances flagged by TrustedAdvisor and associated metadata
+            instances (:obj:`list` of :obj:`dict`): List of instances flagged by TrustedAdvisor and associated metadata
 
         """
         for instance in instances:

@@ -2,7 +2,8 @@ image: "python:3.6.4"
 
 stages:
   - build
-  - deploy 
+  - deploy
+  - pages
 
 before_script:
   - apt-get update -qq && apt-get install -y -qq zip jq
@@ -21,5 +22,13 @@ deploy:
   stage: deploy
   script:
     - ./bin/deploy.sh
+
+pages:
+  stage: deploy
+  script:
+  - mv _build/html/ public/ 
+  artifacts:
+    paths:
+    - public
 
   

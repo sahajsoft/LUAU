@@ -41,8 +41,8 @@ class EC2Wrapper:
         """Tags resources
 
         Args:
-            Resources (:obj: `list` of :obj: `str`): List of Resource Ids
-            Tags (:obj: `list` of :obj: `dict`: List of Key/Value pairs for Tags)
+            Resources (:obj:`list` of :obj:`str`): List of Resource Ids
+            Tags (:obj:`list` of :obj:`dict`): List of Key/Value pairs for Tags
 
         Returns:
             dict: response from AWS CreateTags API Call
@@ -289,7 +289,7 @@ class ASGWrapper:
         """Tag Autoscaling group and it's EC2 instances
 
         Args:
-            :obj: `list` of :obj: `dict`: List of tags to tag ASG and EC2
+            Tags: (:obj:`list` of :obj:`dict`): List of tags to tag ASG and EC2
 
         Returns: 
             dict: Response from AWS EC2 CreateTags API Call
@@ -327,7 +327,7 @@ class TrustedAdvisor:
         """Get low use instances
 
         Returns:
-            [dict]: List of instances flagged as low use by TrustedAdvisor
+            :obj:`list` of :obj:`dict`: List of instances flagged as low use by TrustedAdvisor
         """
         response = self.support.describe_trusted_advisor_check_result(checkId=LOW_USE_CHECK_ID, language='en')
         if 'result' in response:
@@ -366,8 +366,8 @@ class SESWrapper:
 
         Args:
             creator (str): Person receiving email
-            low_use_instances (:obj: `list` of :obj: `dict`): Has all low use instances and associated metadata
-            instances_scheduled_for_deletion (:obj: `list` of :obj: `dict`): Has all scheduled for deletion instances and associated metadata
+            low_use_instances (:obj:`list` of :obj:`dict`): Has all low use instances and associated metadata
+            instances_scheduled_for_deletion (:obj:`list` of :obj:`dict`): Has all scheduled for deletion instances and associated metadata
         Returns:
             dict: Template data to use in SES Email
         """
@@ -410,8 +410,8 @@ class SESWrapper:
 
         Args:
             creator (str, optional): Email of the instances owner. If not given, will send to Admin
-            low_use_instances (:obj: `list` of :obj: `dict`): Has all low use instances and associated metadata
-            instances_scheduled_for_deletion (:obj: `list` of :obj: `dict`): Has all scheduled for deletion instances and associated metadata
+            low_use_instances (:obj:`list` of :obj:`dict`): Has all low use instances and associated metadata
+            instances_scheduled_for_deletion (:obj:`list` of :obj:`dict`): Has all scheduled for deletion instances and associated metadata
             TemplateName (str, optional): SES template to use, must be created in your AWS Account. If none specified, will use Low Use template.
 
         Returns:
@@ -445,8 +445,8 @@ class SESWrapper:
         """Sends the admin report
 
         Args:
-            low_use_instances (:obj: `list` of :obj: `dict`): Has all low use instances and associated metadata
-            instances_scheduled_for_deletion (:obj: `list` of :obj: `dict`): Has all scheduled for deletion instances and associated metadata
+            low_use_instances (:obj:`list` of :obj:`dict`): Has all low use instances and associated metadata
+            instances_scheduled_for_deletion (:obj:`list` of :obj:`dict`): Has all scheduled for deletion instances and associated metadata
 
         Returns:
             dict: Response from AWS SES SendTemplatedEmail API Call
@@ -611,7 +611,7 @@ class DynamoWrapper(object):
         """Removes multiple instances from the low use list
 
         Args:
-            instance_ids (:obj:`list` of :obj: `str`): IDs of EC2 Instance
+            instance_ids (:obj:`list` of :obj:`str`): IDs of EC2 Instance
         """
         for instance_id in instance_ids:
             self.delete_from_low_use(instance_id)

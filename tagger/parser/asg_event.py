@@ -2,7 +2,7 @@
 
 This module parses the AWS Event dictionary for ASG Events to return needed data.
 
-Example:
+Note:
     The module expects specific AWS Event Data, passed through the event parameter. It one event type, referring
     to the event logged by creating an AutoScaling Group:
         * CreateAutoScalingGroup

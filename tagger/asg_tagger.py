@@ -5,9 +5,9 @@ This module is deployed as a Lambda function within an AWS Environment. This fun
 tagging AutoScaling Groups at creation with the email associated with the account creating the group. It
 also tags the group's instances and ensures future instances will inherit the tags. 
 
-Example:
+Note:
     The function expects specific AWS Event Data, passed through the event parameter. It supports one event referring
-    to the creation of an AutoScaling Group
+    to the creation of an AutoScaling Group:
         * CreateAutoScalingGroup
 """
 
@@ -50,7 +50,7 @@ class ASGTagger:
         This method is called by the lambda handler. It parses the event and tags the appropriate resources.
 
         Returns:
-            dict: Response from AWS API call to create tags on desired resources
+            dict: Response from AWS CreateOrUpdateTags API Call
 
         """
         username, asg_name = self.parser.parse_event()
@@ -77,6 +77,6 @@ def lambda_handler(event, context):
         context (dict): Context dictionary passed by AWS (not used but required by AWS)
 
     Returns:
-        dict: response from the ASGTagger.start()
+        dict: Response from AWS CreateOrUpdateTags API Call
     """
     return ASGTagger(event, context).start()

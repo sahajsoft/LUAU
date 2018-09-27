@@ -2,7 +2,7 @@
 
 This module parses the AWS Event dictionary for EC2 Events to return needed data.
 
-Example:
+Note:
     The module expects specific AWS Event Data, passed through the event parameter. It supports four events, each
     referring to a supported resource:
         * RunInstances
@@ -57,6 +57,9 @@ class EC2EventParser(AWSEventParser):
 
         This function merely returns a different part of the event depending upon
         the specific event type being processed.
+
+        Args:
+            event_name (str): Corresponds to the name of the AWS Event
         
         Returns:
             list: List of resource ids from the event
