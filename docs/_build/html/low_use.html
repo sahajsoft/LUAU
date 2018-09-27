@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>low_use package &mdash; LUAU 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="util package" href="util.html" />
+    <link rel="prev" title="tagger.parser package" href="tagger.parser.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LUAU
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tagger.html">tagger package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">low_use package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-low_use.report_parser">low_use.report_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-low_use.tagger">low_use.tagger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-low_use">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">util package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LUAU</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>low_use package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/low_use.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="low-use-package">
+<h1>low_use package<a class="headerlink" href="#low-use-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-low_use.report_parser">
+<span id="low-use-report-parser-module"></span><h2>low_use.report_parser module<a class="headerlink" href="#module-low_use.report_parser" title="Permalink to this headline">¶</a></h2>
+<p>Parses the Low Use report</p>
+<p>This module parses the Low Use Report from AWS Trusted Advisor, and
+grabs some instance metadata from EC2 such as tags</p>
+<dl class="class">
+<dt id="low_use.report_parser.LowUseReportParser">
+<em class="property">class </em><code class="descclassname">low_use.report_parser.</code><code class="descname">LowUseReportParser</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.report_parser.LowUseReportParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parses the Low Use report</p>
+<dl class="attribute">
+<dt id="low_use.report_parser.LowUseReportParser.session">
+<code class="descname">session</code><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boto3 AWS Session Object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">obj</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="low_use.report_parser.LowUseReportParser.advisor">
+<code class="descname">advisor</code><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.advisor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for AWS TrustedAdvisor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">obj</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="low_use.report_parser.LowUseReportParser.ec2">
+<code class="descname">ec2</code><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.ec2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for AWS EC2</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">obj</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.report_parser.LowUseReportParser.get_number_of_days">
+<code class="descname">get_number_of_days</code><span class="sig-paren">(</span><em>day_string</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.get_number_of_days" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get number of days in report</p>
+<p>Used to determine how many days the instance has data for</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>day_string</strong> (<em>str</em>) – String that has the amount of days</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">number of days with data</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.report_parser.LowUseReportParser.parse_instance_usage">
+<code class="descname">parse_instance_usage</code><span class="sig-paren">(</span><em>usage_logs</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.parse_instance_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parsess instance usage</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>(</strong> (<em>usage_logs</em>) – obj: <cite>list</cite> of :obj: <cite>str</cite>): List of unformatted usage over at most 2 weeks</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">lists of CPU usage and network IO over the given time frame.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.report_parser.LowUseReportParser.parse_low_use_report">
+<code class="descname">parse_low_use_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.parse_low_use_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the report</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of Low use instances with associated metadata</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.report_parser.LowUseReportParser.parse_metadata">
+<code class="descname">parse_metadata</code><span class="sig-paren">(</span><em>metadata</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.report_parser.LowUseReportParser.parse_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses instance metadata</p>
+<p>This function mainly formats the metadata to use key/value pairs instead of indexing for
+a better understanding of what the metadata is further downstream</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>(</strong> (<em>metadata</em>) – obj: <cite>list</cite>): Metadata from Low Use report</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Metadata of instance</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-low_use.tagger">
+<span id="low-use-tagger-module"></span><h2>low_use.tagger module<a class="headerlink" href="#module-low_use.tagger" title="Permalink to this headline">¶</a></h2>
+<p>Lambda Function to parse Low Use Report and send email reports</p>
+<p>This function grabs and parses the Low Use report from AWS TrustedAdvisor, flags
+instances as either Whitelisted, Low Use, or Scheduled for Deletion via Tagging
+and DynamoDB Tables, and then sends Low Use/Admin report emails to the given
+users.</p>
+<dl class="class">
+<dt id="low_use.tagger.LowUseTagger">
+<em class="property">class </em><code class="descclassname">low_use.tagger.</code><code class="descname">LowUseTagger</code><span class="sig-paren">(</span><em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parses the Low Use report, sync instance states with Dynamo, and sends email reports</p>
+<dl class="docutils">
+<dt>Attrbiutes:</dt>
+<dd>session (obj): Boto3 AWS Session Object
+ec2 (obj) Wrapper for AWS EC2
+dynamo (obj): Wrapper for AWS DynamoDB
+ses (obj): Wrapper for AWS SES
+event (dict): Event dictionary passed by Lambda trigger
+context (dict): Context dictionary passed by Lambda trigger
+parser (obj): Parses the Low Use Report
+whitelist (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): list of whitelisted instances and associated metadata
+low_use_instances (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): list of low_use instances and associated metadata
+instances_scheduled_for_deletion (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): list of instances scheduled for deletion and associated metadata
+instances_to_stop (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): list of instances to be stopped and associated metadata</dd>
+</dl>
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.flag_instance_as_low_use">
+<code class="descname">flag_instance_as_low_use</code><span class="sig-paren">(</span><em>instance_id</em>, <em>creator</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.flag_instance_as_low_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag an instance as low_use</p>
+<p>Flags an instance as low use via tags and in the a DynamoDB Table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance_id</strong> (<em>str</em>) – ID of EC2 Instance</li>
+<li><strong>creator</strong> (<em>str</em>) – creator of EC2 Instance</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.flag_instance_for_deletion">
+<code class="descname">flag_instance_for_deletion</code><span class="sig-paren">(</span><em>instance_id</em>, <em>creator</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.flag_instance_for_deletion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag an instance as scheduled for deletion</p>
+<p>Flags an instance as scheduled for deletion via tags and in the a DynamoDB Table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance_id</strong> (<em>str</em>) – ID of EC2 Instance</li>
+<li><strong>creator</strong> (<em>str</em>) – creator of EC2 Instance</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.get_creator_report">
+<code class="descname">get_creator_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.get_creator_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates creator reports</p>
+<p>Generates a new report for each creator with associated low use instances</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Yields:</th><td class="field-body"><em>dict</em> – creator report for each creator with associated low use instances</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.sort_instances">
+<code class="descname">sort_instances</code><span class="sig-paren">(</span><em>instances</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sort_instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort instances from Low Use Report</p>
+<dl class="docutils">
+<dt>Sorts the instances flagged by TrustedAdvisor as either:</dt>
+<dd><ul class="first last simple">
+<li>Whitelisted (Will never be stopped)</li>
+<li>Low Use (2 weeks from stopped)</li>
+<li>Scheduled For Deletion (1 week from stopped)</li>
+<li>To Be Stopped Immediately (Stopped in this invocation)</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>instances</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – List of instances flagged by TrustedAdvisor and associated metadata</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.start">
+<code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lambda entry point</p>
+<p>This is where the Lambda invocation starts. It parses the low use reports, sorts the instances
+and sends creator/admin email reports.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.sync_instances_scheduled_for_deletion">
+<code class="descname">sync_instances_scheduled_for_deletion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sync_instances_scheduled_for_deletion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync instances scheduled for deletion</p>
+<p>Flags instances as scheduled for deletion and sets them as such in the LowUse DynamoDB Table</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.sync_low_use_instances">
+<code class="descname">sync_low_use_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sync_low_use_instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync low_use instances</p>
+<p>Flags instances as low use and adds them to the LowUse DynamoDB Table</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.tagger.LowUseTagger.sync_whitelist">
+<code class="descname">sync_whitelist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sync_whitelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync whitelist</p>
+<p>Adds newly whitelisted instances to the Whitelist DynamoDB Table</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="low_use.tagger.lambda_handler">
+<code class="descclassname">low_use.tagger.</code><code class="descname">lambda_handler</code><span class="sig-paren">(</span><em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.lambda_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lambda handler</p>
+<p>This is the handler for the Lambda environment, and kicks off the process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>event</strong> (<em>dict</em>) – Event dictionary passed by Lambda trigger</li>
+<li><strong>context</strong> (<em>dict</em>) – Context dictionary passed by Lambda trigger</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-low_use">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-low_use" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="util.html" class="btn btn-neutral float-right" title="util package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tagger.parser.html" class="btn btn-neutral" title="tagger.parser package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Keith Whitley, Jayant Pahuja, Nick Benton.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
