@@ -45,7 +45,7 @@ class LowUseReportParser:
 
     
         Args:
-            metadata (:obj: `list`): Metadata from Low Use report
+            metadata (:obj:`list`): Metadata from Low Use report
 
         Returns:
             dict: Metadata of instance
@@ -71,7 +71,7 @@ class LowUseReportParser:
         """Parsess instance usage
 
         Args:
-            usage_logs (:obj: `list` of :obj: `str`): List of unformatted usage over at most 2 weeks
+            usage_logs (:obj:`list` of :obj:`str`): List of unformatted usage over at most 2 weeks
 
         Returns:
             list: lists of CPU usage and network IO over the given time frame.

@@ -24,7 +24,6 @@ deploy:
     - ./bin/deploy.sh
 
 pages:
-  stage: deploy
   script:
   - mv docs/_build/html/ public/ 
   artifacts:
