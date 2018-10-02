@@ -34,6 +34,8 @@ class LowUseReportParser:
         list_of_instances = []
         for instance in report:
             instance_metadata = self.parse_metadata(instance['metadata'])
+            if instance_metadata = {}:
+                continue
             list_of_instances.append(instance_metadata)
         return list_of_instances
 
@@ -52,7 +54,7 @@ class LowUseReportParser:
         """
         creator = self.ec2.get_creator_for_instance(metadata[1])
         if creator is None: 
-            return []
+            return {}
         usage_logs = metadata[5:19]
         instance_usage = self.parse_instance_usage(usage_logs)
         instance_metadata = {
