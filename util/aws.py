@@ -166,7 +166,11 @@ class EC2Wrapper:
         Returns:
             list: all tags of EC2 instance (empty list if no tags exist)
         """
-        response = self.ec2.describe_instances(InstanceIds=[instance_id])
+        try:
+            response = self.ec2.describe_instances(InstanceIds=[instance_id])
+        except Exception as e:
+            logger.info(e)
+            return []
         for reservation in response['Reservations']:
             for instance in reservation['Instances']:
                 if instance['InstanceId'] == instance_id:
@@ -258,7 +262,11 @@ class ASGWrapper:
         """
         # Use the first instance because all of them will belong to the same ASG
         instance_id = instance_ids[0]
-        instance_data = self.asg.describe_auto_scaling_instances(InstanceIds=[instance_id])
+        try:
+            instance_data = self.asg.describe_auto_scaling_instances(InstanceIds=[instance_id])
+        except Exception as e:
+            logger.error(e)
+            return None
         try:
             return instance_data['AutoScalingInstances'][0]['AutoScalingGroupName']
         except KeyError as e:
@@ -277,8 +285,12 @@ class ASGWrapper:
         """
         instance_ids = []
         # Grab the first item in the list because we're only asking for 1 ASG
-        asg_data = self.asg.describe_auto_scaling_groups(
-            AutoScalingGroupNames=[asg_name])['AutoScalingGroups'][0]
+        try:
+            asg_data = self.asg.describe_auto_scaling_groups(
+                AutoScalingGroupNames=[asg_name])['AutoScalingGroups'][0]
+        except Exception as e: 
+            logger.info(e)
+            return []
 
         for instance_data in asg_data['Instances']:
             instance_ids.append(instance_data['InstanceId'])

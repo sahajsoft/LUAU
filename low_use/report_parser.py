@@ -50,10 +50,13 @@ class LowUseReportParser:
         Returns:
             dict: Metadata of instance
         """
+        creator = self.ec2.get_creator_for_instance(metadata[1])
+        if creator is None: 
+            return []
         usage_logs = metadata[5:19]
         instance_usage = self.parse_instance_usage(usage_logs)
         instance_metadata = {
-            'creator': self.ec2.get_creator_for_instance(metadata[1]),
+            'creator': creator,
             'region': metadata[0],
             'instance_id': metadata[1],
             'instance_name': metadata[2],

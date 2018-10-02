@@ -47,7 +47,12 @@ class LowUseReporter:
         self.instances_to_stop = []
 
 
-    def sync(self): 
+    def sync(self):
+        """Sync lists
+
+        Syncs this whitelist, low use instances, and instances schedule for deletion lists by flagging
+        the instances with appropriate tags and updating Dynamo Tables.
+        """
         self.sync_whitelist()
         self.sync_low_use_instances()
         self.sync_instances_scheduled_for_deletion()
