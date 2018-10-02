@@ -8,6 +8,24 @@ LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operati
 ## How it works?
 LUAU utilizes amazon's tagging system to create a framework that can alert users about their unececessary expenditure and help act upon them.
 
+## Installation Guide
+
+### Before Cloning the Repo
+1. Make sure you can use the AWS CLI on your machine and that you can access the environment you want to deploy LUAU to. 
+2. Register an email account with SES that will be used to send email reports
+3. Create an S3 Bucket that will be used to store the Lambda .ZIP source.
+4. Create the following parameters in SSM Parameter Store
+    * LAMBDA_CODE_BUCKET -- S3 Bucket Name
+    * SES_EMAIL -- Email Address registered to SES in Step 1.
+    * ADMIN_EMAIL -- Email Address that will receive the Admin Report. 
+
+### After Cloning the Repo
+1. In resources/env.properties, set the AWS_REGION to your desired region (default is us-west-2)
+2. cd into the project root.
+3. Run `python3 ./bin/create_templates.py`. This will create the SES Email templates used in the email reports
+4. Run `./bin/build.sh`. This will generate the LUAU ZIP Artifact. You may need to edit the files permissions to run this
+5. Run `./bin/deploy.sh`. This will deploy LUAU to your AWS Environment. You may need to edit the files permissions to run this
+
 ## Package Structure
 
 ```
@@ -17,7 +35,7 @@ LUAU utilizes amazon's tagging system to create a framework that can alert users
 │   └── deploy.sh -- Deploys lambdas via CloudFormation
 ├── low_use -- Parses low-use instances and sends reports
 │   ├── report_parser.py -- Parses low-use report
-│   └── tagger.py -- Tags instance as LowUse, Whitelisted, or Scheduled For Deletion
+│   └── reporter.py -- Tags instance as LowUse, Whitelisted, or Scheduled For Deletion. Also sends SES Emails and stops instances
 ├── requirements.txt
 ├── resources
 │   ├── env.properties -- Parameters for Lambdas (SES Email, etc.)

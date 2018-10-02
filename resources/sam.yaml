@@ -68,12 +68,12 @@ Resources:
                   - AwsApiCall
                 eventName: 
                   - CreateAutoScalingGroup
-  LowUseTagger:
+  LowUseReporter:
     Type: AWS::Serverless::Function
     Properties:
       Timeout: 300
       MemorySize: 1024
-      Handler: low_use/tagger.lambda_handler
+      Handler: low_use/reporter.lambda_handler
       Runtime: python3.6
       Environment:
         Variables: 
@@ -87,6 +87,7 @@ Resources:
               Action:
                 - ec2:DescribeInstances
                 - ec2:CreateTags
+                - ec2:StopInstances
                 - autoscaling:DescribeAutoScalingGroups
                 - autoscaling:DescribeAutoScalingInstances
                 - autoscaling:CreateOrUpdateTags

@@ -17,7 +17,7 @@ logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-class LowUseTagger:
+class LowUseReporter:
     """Parses the Low Use report, sync instance states with Dynamo, and sends email reports
 
     Attrbiutes:
@@ -128,7 +128,6 @@ class LowUseTagger:
                     'AverageNetworkUsage': network_average
                 })
             elif self.ec2.is_scheduled_for_deletion(instance_id):
-                logger.info("Instance is already scheduled for deletion, doing nothing right now. In the future, instances will be stopped here")
                 self.instances_to_stop.append(instance_id)
             else:
                 self.low_use_instances.append({
@@ -165,14 +164,15 @@ class LowUseTagger:
         report = self.parser.parse_low_use_report()
         self.sort_instances(report)
 
-        #if self.instances_to_stop != []:
-        #    self.ec2.stop_instances(instances_to_stop)
-        #    self.dynamo.batch_delete_item_from_low_use(instances_to_stop)
+        if self.instances_to_stop != []:
+            logger.warning("Stopping the following instances: %s", self.instances_to_stop)
+            self.ec2.stop_instances(self.instances_to_stop)
+            self.dynamo.batch_delete_item_from_low_use(self.instances_to_stop)
         
 
 
-        #for creator_report_data in self.get_creator_report():
-            #response = self.ses.send_low_use_email(creator_report_data['creator'], creator_report_data['low_use'], creator_report_data['scheduled_for_deletion'])
+        for creator_report_data in self.get_creator_report():
+            response = self.ses.send_low_use_email(creator_report_data['creator'], creator_report_data['low_use'], creator_report_data['scheduled_for_deletion'])
     
         response = self.ses.send_admin_report(self.low_use_instances, self.instances_scheduled_for_deletion)
         logger.info(response)
@@ -188,4 +188,4 @@ def lambda_handler(event, context):
         event (dict): Event dictionary passed by Lambda trigger
         context (dict): Context dictionary passed by Lambda trigger
     """
-    return LowUseTagger(event, context).start()
+    return LowUseReporter(event, context).start()
