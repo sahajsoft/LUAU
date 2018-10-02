@@ -34,7 +34,7 @@ class LowUseReportParser:
         list_of_instances = []
         for instance in report:
             instance_metadata = self.parse_metadata(instance['metadata'])
-            if instance_metadata = {}:
+            if instance_metadata == {}:
                 continue
             list_of_instances.append(instance_metadata)
         return list_of_instances
