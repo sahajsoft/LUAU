@@ -7,7 +7,7 @@ stages:
 
 before_script:
   - apt-get update -qq && apt-get install -y -qq zip jq
-  - pip3 install awscli virtualenv
+  - pip3 install awscli virtualenv boto3
   
 build:
   stage: build
