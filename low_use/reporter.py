@@ -46,6 +46,12 @@ class LowUseReporter:
         self.instances_scheduled_for_deletion = []
         self.instances_to_stop = []
 
+
+    def sync(self): 
+        self.sync_whitelist()
+        self.sync_low_use_instances()
+        self.sync_instances_scheduled_for_deletion()
+
     def sync_whitelist(self):
         """Sync whitelist
         
@@ -163,6 +169,7 @@ class LowUseReporter:
         """
         report = self.parser.parse_low_use_report()
         self.sort_instances(report)
+        self.sync()
 
         if self.instances_to_stop != []:
             logger.warning("Stopping the following instances: %s", self.instances_to_stop)
