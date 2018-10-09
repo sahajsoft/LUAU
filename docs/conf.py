@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('../'))
 # -- Project information -----------------------------------------------------
 
 project = 'LUAU'
-copyright = '2018, Keith Whitley, Jayant Pahuja, Nick Benton'
+copyright = '2018, Sahaj Software Solutions, Keith Whitley, Jayant Pahuja, Nick Benton'
 author = 'Keith Whitley, Jayant Pahuja, Nick Benton'
 
 # The short X.Y version
