@@ -1,11 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+Parameters:
+  SESEMAIL:
+    Type: String
+  ADMINEMAIL:
+    Type: String
 Resources:
   EC2Tagger:
     Type: AWS::Serverless::Function
     Properties:
       Handler: tagger/ec2_tagger.lambda_handler
       Runtime: python3.6
+      Timeout: 300
+      MemorySize: 1024
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -36,6 +43,8 @@ Resources:
     Properties:
       Handler: tagger/asg_tagger.lambda_handler
       Runtime: python3.6
+      Timeout: 300
+      MemorySize: 1024
       Policies: 
         - AWSLambdaExecute
         - Version: '2012-10-17'
@@ -59,4 +68,63 @@ Resources:
                   - AwsApiCall
                 eventName: 
                   - CreateAutoScalingGroup
+  LowUseReporter:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 1024
+      Handler: low_use/reporter.lambda_handler
+      Runtime: python3.6
+      Environment:
+        Variables: 
+          SES_EMAIL: !Ref SESEMAIL
+          ADMIN_EMAIL: !Ref ADMINEMAIL
+      Policies: 
+        - AWSLambdaExecute
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:DescribeInstances
+                - ec2:CreateTags
+                - ec2:StopInstances
+                - autoscaling:DescribeAutoScalingGroups
+                - autoscaling:DescribeAutoScalingInstances
+                - autoscaling:CreateOrUpdateTags
+                - dynamodb:DeleteItem
+                - dynamodb:PutItem
+                - dynamodb:GetItem
+                - ses:SendEmail
+                - ses:SendRawEmail
+                - ses:SendTemplatedEmail
+                - support:*
+              Resource: '*'
+      CodeUri: ../LUAUTagger.zip
+      Events:
+        WeeklyEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(7 days) 
+  WhitelistTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: Whitelist
+      PrimaryKey:
+        Name: InstanceID
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+  LowUseTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: LowUse
+      PrimaryKey:
+        Name: InstanceID
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+      
+
 

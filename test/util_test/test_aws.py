@@ -1,8 +1,7 @@
 import unittest
 import boto3
 from moto import mock_autoscaling, mock_ec2, mock_dynamodb2, mock_ses
-from util.aws import EC2Wrapper
-
+from util.aws import EC2Wrapper, ASGWrapper
 class TestEC2Wrapper(unittest.TestCase):
     @mock_ec2
     def setUp(self):
@@ -129,7 +128,14 @@ class TestEC2Wrapper(unittest.TestCase):
         self.assertTrue(self.wrapper.is_tagged(instance, 'test_key'))
 
 class TestASGWrapper(unittest.TestCase):
-    pass
+    @mock_autoscaling
+    def setUp(self):
+        self.session = boto3.Session(region_name='us-west-2')
+        self.wrapper = ASGWrapper(self.session)
+
+    @mock_autoscaling
+    def test_get_asg_user_tag_by_instance_id(self): 
+        pass
 
 class TestTrustedAdvisor(unittest.TestCase):
     pass

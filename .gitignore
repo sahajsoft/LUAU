@@ -2,7 +2,7 @@ __pycache__
 .pytest_cache
 *.pyc
 .vscode
-*.zip 
-.coverage 
+*.zip
+.coverage
 .DS_Store
 local_scripts

@@ -9,7 +9,12 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-python3 -m pytest --cov=tagger --cov=util
+python3 -m pytest --cov=tagger --cov=util --cov=low_use 
+
+if [ $? ==  1 ]; then
+    rm -rf venv
+    exit 1
+fi
 
 deactivate
 
@@ -17,6 +22,7 @@ mkdir build
 find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 cp -r tagger build
 cp -r util build
+cp -r low_use build
 
 find ./venv/lib/python3.6/site-packages/ | grep -E "(moto|mock|pytest|pytest_cov|coverage)" | xargs rm -rf
 cp -r venv/lib/python3.6/site-packages/* build/
