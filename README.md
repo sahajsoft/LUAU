@@ -5,6 +5,13 @@
 # Low Usage AWS Utility(LUAU)
 LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operations of amazon account by acting upon Trusted Advisor(TA) recommendations.
 
+### Documentation
+You can read [the documentation here](https://keithw1.gitlab.io/LUAU/readme.html)
+
+
+### Source Code
+You can view [the source code here](https://gitlab.com/keithw1/LUAU)
+
 ## How it works?
 LUAU utilizes amazon's tagging system to create a framework that can alert users about their unececessary expenditure and help act upon them.
 

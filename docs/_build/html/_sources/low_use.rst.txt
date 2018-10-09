@@ -12,10 +12,10 @@ low\_use.report\_parser module
     :undoc-members:
     :show-inheritance:
 
-low\_use.tagger module
-----------------------
+low\_use.reporter module
+------------------------
 
-.. automodule:: low_use.tagger
+.. automodule:: low_use.reporter
     :members:
     :undoc-members:
     :show-inheritance:

@@ -84,7 +84,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">low_use package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-low_use.report_parser">low_use.report_parser module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-low_use.tagger">low_use.tagger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-low_use.reporter">low_use.reporter module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-low_use">Module contents</a></li>
 </ul>
 </li>
@@ -287,16 +287,16 @@ a better understanding of what the metadata is further downstream</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-low_use.tagger">
-<span id="low-use-tagger-module"></span><h2>low_use.tagger module<a class="headerlink" href="#module-low_use.tagger" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-low_use.reporter">
+<span id="low-use-reporter-module"></span><h2>low_use.reporter module<a class="headerlink" href="#module-low_use.reporter" title="Permalink to this headline">¶</a></h2>
 <p>Lambda Function to parse Low Use Report and send email reports</p>
 <p>This function grabs and parses the Low Use report from AWS TrustedAdvisor, flags
 instances as either Whitelisted, Low Use, or Scheduled for Deletion via Tagging
 and DynamoDB Tables, and then sends Low Use/Admin report emails to the given
 users.</p>
 <dl class="class">
-<dt id="low_use.tagger.LowUseTagger">
-<em class="property">class </em><code class="descclassname">low_use.tagger.</code><code class="descname">LowUseTagger</code><span class="sig-paren">(</span><em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter">
+<em class="property">class </em><code class="descclassname">low_use.reporter.</code><code class="descname">LowUseReporter</code><span class="sig-paren">(</span><em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Parses the Low Use report, sync instance states with Dynamo, and sends email reports</p>
 <dl class="docutils">
@@ -314,8 +314,8 @@ instances_scheduled_for_deletion (<code class="xref py py-obj docutils literal n
 instances_to_stop (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): list of instances to be stopped and associated metadata</dd>
 </dl>
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.flag_instance_as_low_use">
-<code class="descname">flag_instance_as_low_use</code><span class="sig-paren">(</span><em>instance_id</em>, <em>creator</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.flag_instance_as_low_use" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.flag_instance_as_low_use">
+<code class="descname">flag_instance_as_low_use</code><span class="sig-paren">(</span><em>instance_id</em>, <em>creator</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.flag_instance_as_low_use" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flag an instance as low_use</p>
 <p>Flags an instance as low use via tags and in the a DynamoDB Table</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -333,8 +333,8 @@ instances_to_stop (<code class="xref py py-obj docutils literal notranslate"><sp
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.flag_instance_for_deletion">
-<code class="descname">flag_instance_for_deletion</code><span class="sig-paren">(</span><em>instance_id</em>, <em>creator</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.flag_instance_for_deletion" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.flag_instance_for_deletion">
+<code class="descname">flag_instance_for_deletion</code><span class="sig-paren">(</span><em>instance_id</em>, <em>creator</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.flag_instance_for_deletion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flag an instance as scheduled for deletion</p>
 <p>Flags an instance as scheduled for deletion via tags and in the a DynamoDB Table</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -352,8 +352,8 @@ instances_to_stop (<code class="xref py py-obj docutils literal notranslate"><sp
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.get_creator_report">
-<code class="descname">get_creator_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.get_creator_report" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.get_creator_report">
+<code class="descname">get_creator_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.get_creator_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates creator reports</p>
 <p>Generates a new report for each creator with associated low use instances</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -367,8 +367,8 @@ instances_to_stop (<code class="xref py py-obj docutils literal notranslate"><sp
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.sort_instances">
-<code class="descname">sort_instances</code><span class="sig-paren">(</span><em>instances</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sort_instances" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.sort_instances">
+<code class="descname">sort_instances</code><span class="sig-paren">(</span><em>instances</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.sort_instances" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort instances from Low Use Report</p>
 <dl class="docutils">
 <dt>Sorts the instances flagged by TrustedAdvisor as either:</dt>
@@ -391,30 +391,38 @@ instances_to_stop (<code class="xref py py-obj docutils literal notranslate"><sp
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.start">
-<code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.start" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.start">
+<code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lambda entry point</p>
 <p>This is where the Lambda invocation starts. It parses the low use reports, sorts the instances
 and sends creator/admin email reports.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.sync_instances_scheduled_for_deletion">
-<code class="descname">sync_instances_scheduled_for_deletion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sync_instances_scheduled_for_deletion" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.sync">
+<code class="descname">sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync lists</p>
+<p>Syncs this whitelist, low use instances, and instances schedule for deletion lists by flagging
+the instances with appropriate tags and updating Dynamo Tables.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="low_use.reporter.LowUseReporter.sync_instances_scheduled_for_deletion">
+<code class="descname">sync_instances_scheduled_for_deletion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.sync_instances_scheduled_for_deletion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sync instances scheduled for deletion</p>
 <p>Flags instances as scheduled for deletion and sets them as such in the LowUse DynamoDB Table</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.sync_low_use_instances">
-<code class="descname">sync_low_use_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sync_low_use_instances" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.sync_low_use_instances">
+<code class="descname">sync_low_use_instances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.sync_low_use_instances" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sync low_use instances</p>
 <p>Flags instances as low use and adds them to the LowUse DynamoDB Table</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="low_use.tagger.LowUseTagger.sync_whitelist">
-<code class="descname">sync_whitelist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.LowUseTagger.sync_whitelist" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.LowUseReporter.sync_whitelist">
+<code class="descname">sync_whitelist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.LowUseReporter.sync_whitelist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sync whitelist</p>
 <p>Adds newly whitelisted instances to the Whitelist DynamoDB Table</p>
 </dd></dl>
@@ -422,8 +430,8 @@ and sends creator/admin email reports.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="low_use.tagger.lambda_handler">
-<code class="descclassname">low_use.tagger.</code><code class="descname">lambda_handler</code><span class="sig-paren">(</span><em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.tagger.lambda_handler" title="Permalink to this definition">¶</a></dt>
+<dt id="low_use.reporter.lambda_handler">
+<code class="descclassname">low_use.reporter.</code><code class="descname">lambda_handler</code><span class="sig-paren">(</span><em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#low_use.reporter.lambda_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lambda handler</p>
 <p>This is the handler for the Lambda environment, and kicks off the process</p>
 <table class="docutils field-list" frame="void" rules="none">

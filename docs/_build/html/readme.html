@@ -84,8 +84,17 @@
 <li class="toctree-l1"><a class="reference internal" href="util.html">util package</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">README</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#low-usage-aws-utility-luau">Low Usage AWS Utility(LUAU)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#how-it-works">How it works?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#package-structure">Package Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-code">Source Code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-it-works">How it works?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation-guide">Installation Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#before-cloning-the-repo">Before Cloning the Repo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#after-cloning-the-repo">After Cloning the Repo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#package-structure">Package Structure</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -161,19 +170,53 @@
 <div class="section" id="low-usage-aws-utility-luau">
 <h2>Low Usage AWS Utility(LUAU)<a class="headerlink" href="#low-usage-aws-utility-luau" title="Permalink to this headline">¶</a></h2>
 <p>LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operations of amazon account by acting upon Trusted Advisor(TA) recommendations.</p>
+<div class="section" id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>You can read <a class="reference external" href="https://keithw1.gitlab.io/LUAU/readme.html">the documentation here</a></p>
+</div>
+<div class="section" id="source-code">
+<h3>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h3>
+<p>You can view <a class="reference external" href="https://gitlab.com/keithw1/LUAU">the source code here</a></p>
 <div class="section" id="how-it-works">
-<h3>How it works?<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h3>
+<h4>How it works?<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h4>
 <p>LUAU utilizes amazon’s tagging system to create a framework that can alert users about their unececessary expenditure and help act upon them.</p>
 </div>
+<div class="section" id="installation-guide">
+<h4>Installation Guide<a class="headerlink" href="#installation-guide" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="before-cloning-the-repo">
+<h3>Before Cloning the Repo<a class="headerlink" href="#before-cloning-the-repo" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Make sure you can use the AWS CLI on your machine and that you can access the environment you want to deploy LUAU to.</li>
+<li>Register an email account with SES that will be used to send email reports</li>
+<li>Create an S3 Bucket that will be used to store the Lambda .ZIP source.</li>
+<li>Create the following parameters in SSM Parameter Store<ul>
+<li>LAMBDA_CODE_BUCKET – S3 Bucket Name</li>
+<li>SES_EMAIL – Email Address registered to SES in Step 1.</li>
+<li>ADMIN_EMAIL – Email Address that will receive the Admin Report.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="after-cloning-the-repo">
+<h3>After Cloning the Repo<a class="headerlink" href="#after-cloning-the-repo" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>In resources/env.properties, set the AWS_REGION to your desired region (default is us-west-2)</li>
+<li>cd into the project root.</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">./bin/create_templates.py</span></code>. This will create the SES Email templates used in the email reports</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">./bin/build.sh</span></code>. This will generate the LUAU ZIP Artifact. You may need to edit the files permissions to run this</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">./bin/deploy.sh</span></code>. This will deploy LUAU to your AWS Environment. You may need to edit the files permissions to run this</li>
+</ol>
 <div class="section" id="package-structure">
-<h3>Package Structure<a class="headerlink" href="#package-structure" title="Permalink to this headline">¶</a></h3>
+<h4>Package Structure<a class="headerlink" href="#package-structure" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>├── bin
 │   ├── build.sh -- Builds deployment package
 │   ├── create_templates.py -- Used to create email templates in SES
 │   └── deploy.sh -- Deploys lambdas via CloudFormation
 ├── low_use -- Parses low-use instances and sends reports
 │   ├── report_parser.py -- Parses low-use report
-│   └── tagger.py -- Tags instance as LowUse, Whitelisted, or Scheduled For Deletion
+│   └── reporter.py -- Tags instance as LowUse, Whitelisted, or Scheduled For Deletion. Also sends SES Emails and stops instances
 ├── requirements.txt
 ├── resources
 │   ├── env.properties -- Parameters for Lambdas (SES Email, etc.)
@@ -202,6 +245,7 @@
 <li><strong>test</strong>: Where the tests go. Each Python package will have it’s own test package called <code class="docutils literal notranslate"><span class="pre">[package_name]_test</span></code>. This also contains a folder with example event data for the events we want to handle.</li>
 <li><strong>util</strong>: This is a Python package that will contain utility modules that can be shared by the other packages. This includes things like AWS calls.</li>
 </ul>
+</div>
 </div>
 </div>
 </div>

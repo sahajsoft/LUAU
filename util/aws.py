@@ -617,7 +617,8 @@ class DynamoWrapper(object):
             dict: Response from AWS DynamoDB DeleteItem API Call
         """
         key = {"InstanceID": instance_id}
-        return self.low_use.delete_item(Key=key)
+        if self.is_low_use(instance_id):
+            return self.low_use.delete_item(Key=key)
 
     def batch_delete_item_from_low_use(self, instance_ids): 
         """Removes multiple instances from the low use list

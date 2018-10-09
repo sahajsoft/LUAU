@@ -90,7 +90,12 @@ class LowUseReporter:
             instance_id (str): ID of EC2 Instance
             creator (str): creator of EC2 Instance
         """
-        self.ec2.tag_as_low_use(instance_id)
+        try:
+            self.ec2.tag_as_low_use(instance_id)
+        except Exception as e:
+            # sometimes instances appear in the report after they've been terminated, causing an error
+            # we dont need to stop the function for this error, just ignore and continue
+            logger.error(e)
         self.dynamo.add_to_low_use(instance_id, creator)
 
     def flag_instance_for_deletion(self, instance_id, creator): 
@@ -102,7 +107,12 @@ class LowUseReporter:
             instance_id (str): ID of EC2 Instance
             creator (str): creator of EC2 Instance
         """
-        self.ec2.tag_for_deletion(instance_id)
+        try:
+            self.ec2.tag_for_deletion(instance_id)
+        except Exception as e:
+            # sometimes instances appear in the report after they've been terminated, causing an error
+            # we dont need to stop the function for this error, just ignore and continue
+            logger.error(e)
         self.dynamo.schedule_for_deletion(instance_id, creator)
 
     def sort_instances(self, instances):
@@ -120,10 +130,10 @@ class LowUseReporter:
         """
         for instance in instances:
             instance_id = instance['instance_id']
-            creator = instance['creator']
-            cost = instance['cost']
-            cpu_average = instance['cpu_average']
-            network_average = instance['network_average']
+            creator = instance.get('creator', 'Unknown')
+            cost = instance.get('cost', 'Unknown')
+            cpu_average = instance.get('cpu_average', 'Unknown')
+            network_average = instance.get('network_average', 'Unknown')
             if self.ec2.is_whitelisted(instance_id):
                 self.whitelist.append({
                     'InstanceID': instance_id,
@@ -181,8 +191,6 @@ class LowUseReporter:
             self.ec2.stop_instances(self.instances_to_stop)
             self.dynamo.batch_delete_item_from_low_use(self.instances_to_stop)
         
-
-
         for creator_report_data in self.get_creator_report():
             response = self.ses.send_low_use_email(creator_report_data['creator'], creator_report_data['low_use'], creator_report_data['scheduled_for_deletion'])
     
