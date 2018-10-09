@@ -283,7 +283,7 @@ class TestLowUseReporter(unittest.TestCase):
                 }]}
         ]
         result = list(self.reporter.get_creator_report())
-        self.assertEqual(expected_creator_reports, result)
+        self.assertCountEqual(expected_creator_reports, result)
 
     def test_start(self):
         pass
