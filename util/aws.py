@@ -16,14 +16,15 @@ Attributes:
 import boto3
 import logging
 import json
+import os
 
 logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 LOW_USE_CHECK_ID = 'Qch7DwouX1'
-SES_EMAIL = 'keithw@sahajsoft.com'
-ADMIN_EMAIL = 'keithw@sahajsoft.com'
+SES_EMAIL = os.environ.get('SES_EMAIL', 'Unknown')
+ADMIN_EMAIL =  os.environ.get('ADMIN_EMAIL', 'Unknown')
 
 
 class EC2Wrapper:
