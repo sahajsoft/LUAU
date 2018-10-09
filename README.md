@@ -12,6 +12,10 @@ You can read [the documentation here](https://keithw1.gitlab.io/LUAU/readme.html
 ### Source Code
 You can view [the source code here](https://gitlab.com/keithw1/LUAU)
 
+
+### Medium Post
+You can read the corresponding [Medium blog here](https://medium.com/@keithw_53739/reducing-your-aws-bill-765fa8a979bd)
+
 ## How it works?
 LUAU utilizes amazon's tagging system to create a framework that can alert users about their unececessary expenditure and help act upon them.
 
