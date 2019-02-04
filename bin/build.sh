@@ -16,6 +16,7 @@ if [ $? ==  1 ]; then
     exit 1
 fi
 
+PYTHON_SITE_PACKAGE_DIR=$(python -c "import os; print(os.path.dirname(os.__file__) + '/site-packages')")
 deactivate
 
 mkdir build
@@ -24,8 +25,10 @@ cp -r tagger build
 cp -r util build
 cp -r low_use build
 
-find ./venv/lib/python3.6/site-packages/ | grep -E "(moto|mock|pytest|pytest_cov|coverage)" | xargs rm -rf
-cp -r venv/lib/python3.6/site-packages/* build/
+#PYTHON_SITE_PACKAGE_DIR=$(python -c "import os; print(os.path.dirname(os.__file__) + '/site-packages')")
+echo $PYTHON_SITE_PACKAGE_DIR
+find $PYTHON_SITE_PACKAGE_DIR | grep -E "(moto|mock|pytest|pytest_cov|coverage)" | xargs rm -rf
+cp -r $PYTHON_SITE_PACKAGE_DIR/* build/
 
 cd build 
 zip -r LUAUTagger.zip .
