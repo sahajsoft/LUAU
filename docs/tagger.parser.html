@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tagger.parser package &mdash; LUAU 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="low_use package" href="low_use.html" />
+    <link rel="prev" title="tagger package" href="tagger.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> LUAU
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tagger.html">tagger package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tagger.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tagger.parser package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tagger.parser.asg_event">tagger.parser.asg_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tagger.parser.base_event">tagger.parser.base_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tagger.parser.ec2_event">tagger.parser.ec2_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tagger.parser">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tagger.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tagger.html#module-tagger.asg_tagger">tagger.asg_tagger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tagger.html#module-tagger.ec2_tagger">tagger.ec2_tagger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tagger.html#module-tagger">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="low_use.html">low_use package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">util package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LUAU</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tagger.html">tagger package</a> &raquo;</li>
+        
+      <li>tagger.parser package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tagger.parser.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tagger-parser-package">
+<h1>tagger.parser package<a class="headerlink" href="#tagger-parser-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tagger.parser.asg_event">
+<span id="tagger-parser-asg-event-module"></span><h2>tagger.parser.asg_event module<a class="headerlink" href="#module-tagger.parser.asg_event" title="Permalink to this headline">¶</a></h2>
+<p>ASG Event Parser module</p>
+<p>This module parses the AWS Event dictionary for ASG Events to return needed data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The module expects specific AWS Event Data, passed through the event parameter. It one event type, referring
+to the event logged by creating an AutoScaling Group:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>CreateAutoScalingGroup</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="class">
+<dt id="tagger.parser.asg_event.AutoScalingEventParser">
+<em class="property">class </em><code class="descclassname">tagger.parser.asg_event.</code><code class="descname">AutoScalingEventParser</code><span class="sig-paren">(</span><em>session</em>, <em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.asg_event.AutoScalingEventParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tagger.parser.base_event.AWSEventParser" title="tagger.parser.base_event.AWSEventParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">tagger.parser.base_event.AWSEventParser</span></code></a></p>
+<p>Class used to parse all AWS ASG Events</p>
+<dl class="attribute">
+<dt id="tagger.parser.asg_event.AutoScalingEventParser.session">
+<code class="descname">session</code><a class="headerlink" href="#tagger.parser.asg_event.AutoScalingEventParser.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>boto3 object for AWS Session</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">obj</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tagger.parser.asg_event.AutoScalingEventParser.event">
+<code class="descname">event</code><a class="headerlink" href="#tagger.parser.asg_event.AutoScalingEventParser.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>event object passed by caller process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tagger.parser.asg_event.AutoScalingEventParser.context">
+<code class="descname">context</code><a class="headerlink" href="#tagger.parser.asg_event.AutoScalingEventParser.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>context object passed by caller process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.asg_event.AutoScalingEventParser.get_asg_name">
+<code class="descname">get_asg_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.asg_event.AutoScalingEventParser.get_asg_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the name of the AutoScaling Group</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Name of the ASG</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.asg_event.AutoScalingEventParser.parse_event">
+<code class="descname">parse_event</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.asg_event.AutoScalingEventParser.parse_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the ASG Event</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The user email (or username) associated with the created ASG
+str: The name of the AutoScaling Group</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tagger.parser.base_event">
+<span id="tagger-parser-base-event-module"></span><h2>tagger.parser.base_event module<a class="headerlink" href="#module-tagger.parser.base_event" title="Permalink to this headline">¶</a></h2>
+<p>Base AWS Event Parser module</p>
+<p>This module abstracts common attributes from all AWS Events to reduce duplicate code.
+This module is not called directly and is used mainly as an inheritance for more specific event parsers.</p>
+<dl class="class">
+<dt id="tagger.parser.base_event.AWSEventParser">
+<em class="property">class </em><code class="descclassname">tagger.parser.base_event.</code><code class="descname">AWSEventParser</code><span class="sig-paren">(</span><em>session</em>, <em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.base_event.AWSEventParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class used as a base for all AWS Event parsing</p>
+<dl class="attribute">
+<dt id="tagger.parser.base_event.AWSEventParser.session">
+<code class="descname">session</code><a class="headerlink" href="#tagger.parser.base_event.AWSEventParser.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>boto3 object for AWS Session</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">obj</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tagger.parser.base_event.AWSEventParser.event">
+<code class="descname">event</code><a class="headerlink" href="#tagger.parser.base_event.AWSEventParser.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>event object passed by caller process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tagger.parser.base_event.AWSEventParser.context">
+<code class="descname">context</code><a class="headerlink" href="#tagger.parser.base_event.AWSEventParser.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>context object passed by caller process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.base_event.AWSEventParser.get_event_name">
+<code class="descname">get_event_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.base_event.AWSEventParser.get_event_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get event name</p>
+<p>Gets the AWS event name from the event dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">name of the event in question</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.base_event.AWSEventParser.get_username">
+<code class="descname">get_username</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.base_event.AWSEventParser.get_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get username</p>
+<p>Gets the username of the account that created the AWS Resource in question</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Username of the account</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tagger.parser.ec2_event">
+<span id="tagger-parser-ec2-event-module"></span><h2>tagger.parser.ec2_event module<a class="headerlink" href="#module-tagger.parser.ec2_event" title="Permalink to this headline">¶</a></h2>
+<p>EC2 Event Parser module</p>
+<p>This module parses the AWS Event dictionary for EC2 Events to return needed data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The module expects specific AWS Event Data, passed through the event parameter. It supports four events, each
+referring to a supported resource:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>RunInstances</li>
+<li>CreateSecurityGroup</li>
+<li>CreateVolume</li>
+<li>CreateImage</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="class">
+<dt id="tagger.parser.ec2_event.EC2EventParser">
+<em class="property">class </em><code class="descclassname">tagger.parser.ec2_event.</code><code class="descname">EC2EventParser</code><span class="sig-paren">(</span><em>session</em>, <em>event</em>, <em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tagger.parser.base_event.AWSEventParser" title="tagger.parser.base_event.AWSEventParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">tagger.parser.base_event.AWSEventParser</span></code></a></p>
+<p>Class used to parse all AWS EC2 Events</p>
+<dl class="attribute">
+<dt id="tagger.parser.ec2_event.EC2EventParser.session">
+<code class="descname">session</code><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>boto3 object for AWS Session</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">obj</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tagger.parser.ec2_event.EC2EventParser.event">
+<code class="descname">event</code><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>event object passed by caller process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tagger.parser.ec2_event.EC2EventParser.context">
+<code class="descname">context</code><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>context object passed by caller process</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.ec2_event.EC2EventParser.get_created_instance_ids">
+<code class="descname">get_created_instance_ids</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.get_created_instance_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the ids of created instances</p>
+<p>This is used for events from created EC2 Instances.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of ids from the event</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.ec2_event.EC2EventParser.get_resource_ids">
+<code class="descname">get_resource_ids</code><span class="sig-paren">(</span><em>event_name</em><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.get_resource_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the ids of created resources</p>
+<p>This function merely returns a different part of the event depending upon
+the specific event type being processed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event_name</strong> (<em>str</em>) – Corresponds to the name of the AWS Event</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of resource ids from the event</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.ec2_event.EC2EventParser.invoked_by_asg">
+<code class="descname">invoked_by_asg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.invoked_by_asg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if the event was invoked by an ASG</p>
+<p>EC2 Instances started by an AutoScaling Group will not have the user data in the event,
+so we need to check if an instance was created by one in order to go get the user data from the ASG itself.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if created by ASG, False otherwise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tagger.parser.ec2_event.EC2EventParser.parse_event">
+<code class="descname">parse_event</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tagger.parser.ec2_event.EC2EventParser.parse_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the event dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The user email (or username) associated with the created resources
+list: ids of the created resources.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tagger.parser">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tagger.parser" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="low_use.html" class="btn btn-neutral float-right" title="low_use package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tagger.html" class="btn btn-neutral" title="tagger package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Sahaj Software Solutions, Keith Whitley, Jayant Pahuja, Nick Benton
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
