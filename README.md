@@ -1,19 +1,13 @@
-[![pipeline status](https://gitlab.com/keithw1/LUAU/badges/master/pipeline.svg)](https://gitlab.com/keithw1/LUAU/commits/master)
-
-[![coverage report](https://gitlab.com/keithw1/LUAU/badges/master/coverage.svg)](https://gitlab.com/keithw1/LUAU/commits/master)
-
 # Low Usage AWS Utility(LUAU)
 LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operations of amazon account by acting upon Trusted Advisor(TA) recommendations.
 
 ### Documentation
-You can read [the documentation here](https://keithw1.gitlab.io/LUAU/readme.html)
-
+You can read [the documentation here](docs/_build/html/index.html)
 
 ### Source Code
-You can view [the source code here](https://gitlab.com/keithw1/LUAU)
+You can view the source code in this repository.
 
-
-### Medium Post
+### Rationale behind development of the product
 You can read the corresponding [Medium blog here](https://medium.com/@keithw_53739/reducing-your-aws-bill-765fa8a979bd)
 
 ## How it works?
