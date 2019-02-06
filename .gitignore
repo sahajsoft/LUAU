@@ -7,3 +7,5 @@ __pycache__
 .DS_Store
 local_scripts
 resources/cf.yaml
+venv*/
+LUAUTagger/

@@ -1,19 +1,13 @@
-[![pipeline status](https://gitlab.com/keithw1/LUAU/badges/master/pipeline.svg)](https://gitlab.com/keithw1/LUAU/commits/master)
-
-[![coverage report](https://gitlab.com/keithw1/LUAU/badges/master/coverage.svg)](https://gitlab.com/keithw1/LUAU/commits/master)
-
 # Low Usage AWS Utility(LUAU)
 LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operations of amazon account by acting upon Trusted Advisor(TA) recommendations.
 
 ### Documentation
-You can read [the documentation here](https://keithw1.gitlab.io/LUAU/readme.html)
-
+You can read [the documentation here](docs/_build/html/index.html)
 
 ### Source Code
-You can view [the source code here](https://gitlab.com/keithw1/LUAU)
+You can view the source code in this repository.
 
-
-### Medium Post
+### Rationale behind development of the product
 You can read the corresponding [Medium blog here](https://medium.com/@keithw_53739/reducing-your-aws-bill-765fa8a979bd)
 
 ## How it works?
@@ -29,13 +23,16 @@ LUAU utilizes amazon's tagging system to create a framework that can alert users
     * LAMBDA_CODE_BUCKET -- S3 Bucket Name
     * SES_EMAIL -- Email Address registered to SES in Step 1.
     * ADMIN_EMAIL -- Email Address that will receive the Admin Report. 
+5. This requires [AWS Trusted Advisor Business support](https://console.aws.amazon.com/support/plans/home#/) to access the AWS Support APIs
 
 ### After Cloning the Repo
 1. In resources/env.properties, set the AWS_REGION to your desired region (default is us-west-2)
 2. cd into the project root.
-3. Run `python3 ./bin/create_templates.py`. This will create the SES Email templates used in the email reports
-4. Run `./bin/build.sh`. This will generate the LUAU ZIP Artifact. You may need to edit the files permissions to run this
-5. Run `./bin/deploy.sh`. This will deploy LUAU to your AWS Environment. You may need to edit the files permissions to run this
+3. install python 3.6 (and check that it works by running `which python3.6`) and create a virtual environment with it. `virtualenv venv_dev --python=$(which python3.6)`. Don't use the venv virtual environment as that is used in the build script to create an artifact.
+... Locally the build and deploy scripts worked with python 3.7 but the cloudformation script specifies that python 3.6 is required.
+4. Run `python3 ./bin/create_templates.py`. This will create the SES Email templates used in the email reports
+5. Run `./bin/build.sh`. This will generate the LUAU ZIP Artifact. You may need to edit the files permissions to run this
+6. Run `./bin/deploy.sh`. This will deploy LUAU to your AWS Environment. You may need to edit the files permissions to run this
 
 ## Package Structure
 
