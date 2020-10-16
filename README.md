@@ -2,7 +2,7 @@
 LUAU is a plug-n-play suite of lambdas that aims to minimize the cost of operations of amazon account by acting upon Trusted Advisor(TA) recommendations.
 
 ### Documentation
-You can read [the documentation here](docs/_build/html/index.html)
+You can read [the documentation here](https://keithw1.gitlab.io/LUAU/)
 
 ### Source Code
 You can view the source code in this repository.
